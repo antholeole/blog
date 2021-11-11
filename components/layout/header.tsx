@@ -6,10 +6,12 @@ export const Header = () => {
     return (
         <Navbar bg="light" variant="light" expand="sm" sticky="top" className="shadow-sm" >
             <Container >
+                <Link href="/" passHref>
                 <Navbar.Brand href="#home">
                     <img src="/memojis/clouds.png" alt="A emoji of Anthony" width="50" height="50" />
-                    Anthony&apos;s Blog
+                    Anthony&apos;s Site
                 </Navbar.Brand>
+                </Link>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto">
