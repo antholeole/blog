@@ -8,16 +8,15 @@ import { IMeta } from '../../../helpers/types'
 import Link from 'next/link'
 import { postTitle } from '../../../helpers/post_title'
 import { capitalizeWords } from '../../../helpers/capitalize_words'
-import Script from 'next/script'
 import ReactMarkdown from 'react-markdown'
-import CodeBlock from '../../../components/layout/code'
+import { MarkdownTransformer, imageTransformer } from '../../../helpers/md_transformer'
 
 
 const BlogPost = ({ post, meta, titleSlug, category }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const title = postTitle(titleSlug, meta.title)
 
   return (
-    <Layout>
+    <Layout title={title}>
       <article className="w-100">
         <Breadcrumb>
         <Link href="/blog" passHref>
@@ -32,7 +31,7 @@ const BlogPost = ({ post, meta, titleSlug, category }: InferGetStaticPropsType<t
         </Breadcrumb>
         <h1>{title}</h1>
         {meta.date && <sub>{meta.date}</sub>}
-        <ReactMarkdown components={CodeBlock}>{post}</ReactMarkdown>
+        <ReactMarkdown components={MarkdownTransformer} transformImageUri={(src) => imageTransformer(src, titleSlug, category)}>{post}</ReactMarkdown>
       </article>
     </Layout>
   )

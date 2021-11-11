@@ -2,7 +2,17 @@ I think it's fitting that my first Leetcode session on this journey is a confide
 
 [Here's the link the the problem](https://leetcode.com/problems/minimum-value-to-get-positive-step-by-step-sum/submissions/).
 
-The intuition here is that we're adding the numbers in nums LTR gives us a running total graph, and we want to add the lowest constant to the starting point of the graph that the absolute minimum is equal to one. To do this, we need to find the absolute minimum:
+The intuition here is that we're adding the numbers in nums LTR gives us a running total graph, and we want to add the lowest constant to the starting point of the graph that the absolute minimum is equal to one. 
+
+For example, imagine we have a running sum that looks like this, where the Y axis is the current running sum: 
+
+![absolute min](absolute_min.jpg)
+
+because the absolute min is -2 (doesn't matter where it is, just what it is), we need to shift the whole graph up by c, where absMin + c = -1 so we end up with a graph that looks like this:
+
+![new absolute min](new_absolute_min.jpg)
+
+To do this, we need to find the absolute minimum:
 
 ```typescript
 let lowestPoint = 0

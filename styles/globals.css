@@ -23,6 +23,15 @@ a {
   text-decoration: none;
 }
 
+.multi-column {
+  column-count: 2;
+  -moz-column-count: 2;
+  -webkit-column-count: 2;
+  -webkit-column-break-inside: avoid-column;
+  page-break-inside: avoid;
+  break-inside: avoid-column;
+}
+
 * {
   box-sizing: border-box;
 }

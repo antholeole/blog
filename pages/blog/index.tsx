@@ -19,11 +19,12 @@ const Home = ({ categories }: InferGetStaticPropsType<typeof getStaticProps>) =>
                 I hope you find something interesting :)
             </p>
             <h4>Blog Categories:</h4>
+            <div className="multi-column">
                 {categories.map((v) => (<>
-                    <Card style={{ width: '18rem' }}>
+                    <Card className="mb-3 d-inline-flex" key={v.name}>
                         <Card.Body>
                             <Card.Title>{capitalizeWords(v.name)}</Card.Title>
-                            <Card.Text>
+                            <Card.Text as="article">
                                 <ReactMarkdown>{v.summary}</ReactMarkdown>  
                             </Card.Text>
                             <Link href={`/blog/${v.name}`} passHref>
@@ -32,6 +33,7 @@ const Home = ({ categories }: InferGetStaticPropsType<typeof getStaticProps>) =>
                         </Card.Body>
                     </Card>
                 </>))}   
+            </div>
         </Layout>
     )
 }

@@ -16,21 +16,23 @@ export default function CategoryList({ posts }: InferGetStaticPropsType<typeof g
 
     return <Layout>
         <Breadcrumb>
-        <Link href="/blog" passHref>
-          <Breadcrumb.Item href="#">Blog</Breadcrumb.Item>
-        </Link>
-        <Link href={`/blog/${category}`} passHref>
-          <Breadcrumb.Item href="#">{capitalizeWords(category)}</Breadcrumb.Item>
-        </Link>
+            <Link href="/blog" passHref>
+                <Breadcrumb.Item href="#">Blog</Breadcrumb.Item>
+            </Link>
+            <Link href={`/blog/${category}`} passHref>
+                <Breadcrumb.Item href="#">{capitalizeWords(category)}</Breadcrumb.Item>
+            </Link>
         </Breadcrumb>
         <h2>{capitalizeWords(category)}</h2>
-        {posts.map((post) => (
-        <div key={post.slug} className="py-3">
-        <Link href={`/blog/${category}/${post.slug}`} passHref>
-            <a className="link-primary d-block">{post.meta.title ?? post.slug}</a>
-        </Link>
-        {post.meta.date && <small className="text-muted">{post.meta.date}</small>}
-        </div>))}
+        {posts.sort((a,b) => 
+             new Date(b.meta.date!).valueOf() - new Date(a.meta.date!).valueOf()
+        ).map((post) => (
+            <div key={post.slug} className="py-3">
+                <Link href={`/blog/${category}/${post.slug}`} passHref>
+                    <a className="link-primary d-block">{post.meta.title ?? post.slug}</a>
+                </Link>
+                {post.meta.date && <small className="text-muted">{post.meta.date}</small>}
+            </div>))}
     </Layout>
 }
 
