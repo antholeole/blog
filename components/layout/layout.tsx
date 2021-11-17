@@ -7,6 +7,7 @@ export const Layout = ({ children, title }: React.PropsWithChildren<{title?: str
     return <main className="bg-light">
         <Head>
         <link rel="favicon icon" href={favicon.src} type="image/x-icon" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs" crossOrigin="anonymous" />
         <title>Ant{'\''}s Blog {title && `- ${title}`}</title>
         </Head>
         <Header/>

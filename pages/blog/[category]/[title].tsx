@@ -10,6 +10,9 @@ import { postTitle } from '../../../helpers/post_title'
 import { capitalizeWords } from '../../../helpers/capitalize_words'
 import ReactMarkdown from 'react-markdown'
 import { MarkdownTransformer, imageTransformer } from '../../../helpers/md_transformer'
+import remarkMath from 'remark-math'
+import remarkGfm from 'remark-gfm'
+import rehypeKatex from 'rehype-katex'
 
 
 const BlogPost = ({ post, meta, titleSlug, category }: InferGetStaticPropsType<typeof getStaticProps>) => {
@@ -31,7 +34,14 @@ const BlogPost = ({ post, meta, titleSlug, category }: InferGetStaticPropsType<t
         </Breadcrumb>
         <h1>{title}</h1>
         {meta.date && <sub>{meta.date}</sub>}
-        <ReactMarkdown components={MarkdownTransformer} transformImageUri={(src) => imageTransformer(src, titleSlug, category)}>{post}</ReactMarkdown>
+        <ReactMarkdown 
+          components={MarkdownTransformer} 
+          transformImageUri={(src) => imageTransformer(src, titleSlug, category)}
+          remarkPlugins={[remarkMath, remarkGfm]}
+          rehypePlugins={[rehypeKatex]}
+        >
+            {post}
+        </ReactMarkdown>
       </article>
     </Layout>
   )
