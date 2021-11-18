@@ -115,7 +115,20 @@ function uniquePaths(m: number, n: number): number {
 };
 ```
 
-There is a math optimization but I'm not smart enough to understand, nor do I think it's feasable to come across - it involves combimatrix, which I don't have a background in :(.
+Attempting to get the maths solution, here's a fun little code golf solution which is very sub-optimal:
+
+```typescript
+function uniquePaths(m: number, n: number): number {
+    if (m === 1 || n === 1) {
+        return 1
+    } 
+
+    return uniquePaths(n - 1, m) + uniquePaths(n, m - 1)    
+};
+```
+
+
+
 
 
 
