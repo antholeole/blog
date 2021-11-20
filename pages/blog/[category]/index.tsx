@@ -36,17 +36,17 @@ export default function CategoryList({ posts }: InferGetStaticPropsType<typeof g
                 label="🔎 Search..."
                 className="mb-3"
             >
-            <FormControl
-                placeholder="🔎 Search..."
-                type="search"
-                aria-label="Search"
-                onChange={(e) => setSearchTerm(e.target.value)}
-            />
+                <FormControl
+                    placeholder="🔎 Search..."
+                    type="search"
+                    aria-label="Search"
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
             </FloatingLabel>
         </Form>
         {posts.sort((a, b) =>
             new Date(b.meta.date!).valueOf() - new Date(a.meta.date!).valueOf()
-        ).filter((post) => (post.meta.title ?? post.slug).includes(searchTerm))
+        ).filter((post) => (post.meta.title ?? post.slug).toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase()))
             .map((post) => (
                 <div key={post.slug} className="py-3">
                     <Link href={`/blog/${category}/${post.slug}`} passHref>
