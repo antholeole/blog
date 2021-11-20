@@ -10,8 +10,6 @@ import { capitalizeWords } from '../../helpers/capitalize_words'
 import ReactMarkdown from 'react-markdown'
 
 const Home = ({ categories }: InferGetStaticPropsType<typeof getStaticProps>) => {
-
-
     return (
         <Layout>
             <h3>Welcome to the Blog!</h3>

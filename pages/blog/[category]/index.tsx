@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import { useRouter } from 'next/dist/client/router'
-import React from 'react'
+import React, { useState } from 'react'
 import { Layout } from '../../../components/layout/layout'
 import { getBlogCategories, getCategoriesPosts } from '../../../helpers/get_posts'
 import { capitalizeWords } from '../../../helpers/capitalize_words'
@@ -8,11 +8,17 @@ import Link from 'next/link'
 import { IMeta } from '../../../helpers/types'
 import { readFileSync } from 'fs'
 import { join } from 'path'
-import { Breadcrumb } from 'react-bootstrap'
+import { Breadcrumb, FloatingLabel, Form, FormControl } from 'react-bootstrap'
 
 
 export default function CategoryList({ posts }: InferGetStaticPropsType<typeof getStaticProps>) {
     const category = useRouter().query.category as string
+    const [searchTerm, setSearchTerm] = useState('')
+
+
+    const submitted = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+    }
 
     return <Layout>
         <Breadcrumb>
@@ -24,15 +30,30 @@ export default function CategoryList({ posts }: InferGetStaticPropsType<typeof g
             </Link>
         </Breadcrumb>
         <h2>{capitalizeWords(category)}</h2>
-        {posts.sort((a,b) => 
-             new Date(b.meta.date!).valueOf() - new Date(a.meta.date!).valueOf()
-        ).map((post) => (
-            <div key={post.slug} className="py-3">
-                <Link href={`/blog/${category}/${post.slug}`} passHref>
-                    <a className="link-primary d-block">{post.meta.title ?? post.slug}</a>
-                </Link>
-                {post.meta.date && <small className="text-muted">{post.meta.date}</small>}
-            </div>))}
+        <Form className="me-2" onSubmit={submitted}>
+            <FloatingLabel
+                controlId="floatingInput"
+                label="🔎 Search..."
+                className="mb-3"
+            >
+            <FormControl
+                placeholder="🔎 Search..."
+                type="search"
+                aria-label="Search"
+                onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            </FloatingLabel>
+        </Form>
+        {posts.sort((a, b) =>
+            new Date(b.meta.date!).valueOf() - new Date(a.meta.date!).valueOf()
+        ).filter((post) => (post.meta.title ?? post.slug).includes(searchTerm))
+            .map((post) => (
+                <div key={post.slug} className="py-3">
+                    <Link href={`/blog/${category}/${post.slug}`} passHref>
+                        <a className="link-primary d-block">{post.meta.title ?? post.slug}</a>
+                    </Link>
+                    {post.meta.date && <small className="text-muted">{post.meta.date}</small>}
+                </div>))}
     </Layout>
 }
 
