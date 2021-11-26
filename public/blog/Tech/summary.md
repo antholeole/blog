@@ -1,2 +1,1 @@
-I'm a programmer: I write about tech. *a lot*. 
-
+Various tech content. Can also be found on my [medium](https://anth-oleinik.medium.com/) :).

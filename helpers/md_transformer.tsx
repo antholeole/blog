@@ -29,6 +29,8 @@ export const MarkdownTransformer = {
   a(props: React.LinkHTMLAttributes<{}>) {
     if (props.href?.replace('https://', '').startsWith('gist.github.com')) {
       return <Gist id={props.href.split('/').pop()!} />
+    } else {
+      return <a {...props} />
     }
   }
 }
