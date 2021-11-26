@@ -1,4 +1,5 @@
 import React from 'react'
+import Gist from 'react-gist'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import {dracula} from 'react-syntax-highlighter/dist/cjs/styles/prism'
 
@@ -24,6 +25,11 @@ export const MarkdownTransformer = {
     <img src={props.src!} alt={props.alt} className={'mw-100'}  />
     {props.alt && <figcaption className="text-muted">{props.alt}</figcaption>}
     </div>
+  },
+  a(props: React.LinkHTMLAttributes<{}>) {
+    if (props.href?.replace('https://', '').startsWith('gist.github.com')) {
+      return <Gist id={props.href.split('/').pop()!} />
+    }
   }
 }
 
