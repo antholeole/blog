@@ -1,0 +1,29 @@
+class RainbowTile extends StatelessWidget {
+  final int index;
+  final int counterVal;
+  final Function(LayerLink) onTap;
+  final link = LayerLink();
+
+  RainbowTile(
+      {Key? key,
+      required this.index,
+      required this.counterVal,
+      required this.onTap})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return CompositedTransformTarget(
+      link: link,
+      child: Container(
+          color: Colors.primaries[index % Colors.primaries.length],
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(
+              child: Text(counterVal.toString(),
+                  style: const TextStyle(fontSize: 36)),
+            ),
+          )),
+    );
+  }
+}
