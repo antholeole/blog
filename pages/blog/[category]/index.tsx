@@ -13,6 +13,7 @@ import { Breadcrumb, FloatingLabel, Form, FormControl } from 'react-bootstrap'
 
 export default function CategoryList({ posts }: InferGetStaticPropsType<typeof getStaticProps>) {
     const category = useRouter().query.category as string
+    const categoryName = capitalizeWords(category.replace(/-/g, ' '))
     const [searchTerm, setSearchTerm] = useState('')
 
 
@@ -26,10 +27,10 @@ export default function CategoryList({ posts }: InferGetStaticPropsType<typeof g
                 <Breadcrumb.Item href="#">Blog</Breadcrumb.Item>
             </Link>
             <Link href={`/blog/${category}`} passHref>
-                <Breadcrumb.Item href="#">{capitalizeWords(category)}</Breadcrumb.Item>
+                <Breadcrumb.Item href="#">{categoryName}</Breadcrumb.Item>
             </Link>
         </Breadcrumb>
-        <h2>{capitalizeWords(category)}</h2>
+        <h2>{categoryName}</h2>
         <Form className="me-2" onSubmit={submitted}>
             <FloatingLabel
                 controlId="floatingInput"
