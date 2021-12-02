@@ -18,6 +18,9 @@ export const Header = () => {
                         <Link href="/" passHref>
                             <Nav.Link>Home</Nav.Link>
                         </Link>
+                        <Link href="/resume" passHref>
+                            <Nav.Link>Résumé</Nav.Link>
+                        </Link>
                         <Link href="/blog" passHref>
                             <Nav.Link>Blog</Nav.Link>
                         </Link>
