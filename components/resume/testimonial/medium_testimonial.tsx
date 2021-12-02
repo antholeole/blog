@@ -1,6 +1,6 @@
 
 
-import Image from 'next/image'
+import Image from 'react-bootstrap/Image'
 import { randomColor } from '../../../helpers/random_color'
 
 interface IMediumTestimonial {
