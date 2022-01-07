@@ -1,6 +1,7 @@
 
 
 import Image from 'react-bootstrap/Image'
+import { monthDiff } from '../../../helpers/month_diff'
 import { randomColor } from '../../../helpers/random_color'
 
 interface IMediumTestimonial {
@@ -16,8 +17,6 @@ interface IMediumTestimonial {
 export const MediumTestimonial = ({
     username, likes, children, date, via
 }: React.PropsWithChildren<IMediumTestimonial>) => {
-    const timeAgo = new Date().getMonth() - date.getMonth()
-
     return <div className="testimonial-container">
     <div className="medium-testimonial">
         <div className="picture">
@@ -26,7 +25,7 @@ export const MediumTestimonial = ({
             </div>
             <div className="nametag">
                 <p className="name">{username}</p>
-                <span className="date">{timeAgo} months ago</span>
+                <span className="date">{monthDiff(date)} months ago</span>
             </div>
         </div>
         <div className="content">

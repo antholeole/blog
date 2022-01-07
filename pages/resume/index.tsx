@@ -66,7 +66,7 @@ const Resume = () => {
                 <Accordion.Body>
                     <YoutubeTestimonial
                         username={'Nathaniel Woodbury'}
-                        date={new Date('3/1/22')}
+                        date={new Date('3/1/21')}
                         via={{
                             href: 'https://www.youtube.com/watch?v=XjkB_O_rRgc&lc=Ugz_plZivIiszeZyAjp4AaABAg',
                             platform: 'Youtube Comments'
@@ -81,7 +81,7 @@ const Resume = () => {
                             How long have you been working with rust? Your clarity and understanding for it is so high and the code you write is very clean. This video had such incredible explanations and was so clear!
                         </p>
                     </YoutubeTestimonial>
-                    <MediumTestimonial username={'Azalea Kemp'} likes={1} date={new Date('2/1/22')} via={{
+                    <MediumTestimonial username={'Azalea Kemp'} likes={1} date={new Date('2/1/21')} via={{
                         href: 'https://levelup.gitconnected.com/how-to-keep-your-footer-at-the-bottom-of-the-page-the-easy-way-20aa3bcd621f',
                         platform: 'Medium.com'
                     }}>
