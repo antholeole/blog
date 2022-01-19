@@ -14,8 +14,7 @@ const Home: NextPage = () => {
               Anthony Oleinik
               </h1>
             <p className="fs-5">
-              Ramblings of a lunatic. Building <a href="https://getclub.app">Club App.</a> 
-              {' '}I write about what I&lsquo;m learning and what I&lsquo;m building.
+              If you&lsquo;re here - welcome! I write about what I&lsquo;m learning and what I&lsquo;m building.  
             </p>
         </div>
     </div>
