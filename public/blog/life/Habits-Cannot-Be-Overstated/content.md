@@ -1,5 +1,3 @@
-# Habits Cannot be Overstated
-
 Short mental ramble here, just to jot some thoughts down:
 
 Habits are so stupidly powerful when used correctly it's like a self-help readers dream.
@@ -18,3 +16,8 @@ Something large like going to the gym is a goal that is often set, but it can be
 - To-Do list Checking
 
 Of course these habits aren't permanent and they never stop taking effort to complete. It would be easier to just leave my keys in my pants, but it feels _wrong_. Creating a habit out of something makes it the 'default behavior', where not doing that behavior would have to be an intentional choice. 
+
+Some things I have on my habit-creation To Do list:
+- write here (oops!)
+- LeetCode (still not a habit, although a couple times a week I get the urge to do a problem or two)
+- reading (Very difficult with a not so set schedule due to school + Lacrosse)
