@@ -65,7 +65,7 @@ export const getStaticProps: GetStaticProps<{ posts: { slug: string, meta: IMeta
         props: {
             posts: getCategoriesPosts(category).map((postTitle) => ({
                 slug: postTitle,
-                meta: JSON.parse(readFileSync(join(process.cwd(), 'public/blog', category, postTitle, 'meta.json')).toString()),
+                meta: JSON.parse(readFileSync(join(process.cwd(), 'blog', category, postTitle, 'meta.json')).toString()),
             }))
         }
     }

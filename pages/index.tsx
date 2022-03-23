@@ -14,7 +14,9 @@ const Home: NextPage = () => {
               Anthony Oleinik
               </h1>
             <p className="fs-5">
-              If you&lsquo;re here - welcome! I write about what I&lsquo;m learning and what I&lsquo;m building.  
+              If you&lsquo;re here - welcome to my tiny corner of the internet.
+              <br />
+              Many of this was written with no end reader in mind, but feel free to be the end reader if you&lsquo;d like!
             </p>
         </div>
     </div>

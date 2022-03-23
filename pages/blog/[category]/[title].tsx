@@ -57,8 +57,8 @@ export const getStaticProps: GetStaticProps<
     props: {
       titleSlug: title,
       category,
-      post: readFileSync(join(process.cwd(), 'public/blog', category, title, 'content.md')).toString(),
-      meta: JSON.parse(readFileSync(join(process.cwd(), 'public/blog', category, title, 'meta.json')).toString())
+      post: readFileSync(join(process.cwd(), 'blog', category, title, 'content.md')).toString(),
+      meta: JSON.parse(readFileSync(join(process.cwd(), 'blog', category, title, 'meta.json')).toString())
     },
   }
 }
