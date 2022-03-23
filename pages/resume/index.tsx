@@ -92,24 +92,6 @@ const Resume = () => {
                 </Accordion.Body>
             </Accordion.Item>
             <Accordion.Item eventKey="2">
-                <Accordion.Header>Personal Projects</Accordion.Header>
-                <Accordion.Body>
-                    <h3>Club App (2021-current)</h3>
-                    <hr />
-                    <p>
-                        Serverless mobile (Android, iOS) chatting application with DMs, Groups, Threads, Roles, Notifications.
-                        <br />
-                        Complete with CI/CD, multiple environments, Industry standard secret management, error logging.
-                        <br />
-                        This project is a WIP, and therefore the repository is not public.
-
-                        <br />
-                        <b>Stack</b>: Hasura GraphQL backend, PostgresDB, Pulumi IaaC, Cloudflare Workers (Lambda alternative),
-                        Fargate for containerization, Github Actions for CI/CD, AWS Application Load Balancer. Flutter on frontend.
-                    </p>
-                </Accordion.Body>
-            </Accordion.Item>
-            <Accordion.Item eventKey="3">
                 <Accordion.Header>Skills</Accordion.Header>
                 <Accordion.Body>
                     <h3>Programming:</h3>

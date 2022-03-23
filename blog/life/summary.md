@@ -1,1 +1,0 @@
-Random short essays on anything I feel like writing about.
