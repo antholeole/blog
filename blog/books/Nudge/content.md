@@ -1,7 +1,3 @@
-What seperates "pop science" and hardcore science to me is ease of reading. Not many people are going to be able to sit through a research paper presented in typical research format.
-
-Thaler and Sunstein (Whom I will be refering to as TS from now on to save my poor keyboard) do a phenominal job turning something so small into such a interesting read. 
-
 I love the idea that everything is a nudge, concious or not. The example of the school cafeteria is a great one: no matter how the cafeteria is organized, it will influence the students behaviors in some way. If the fruits are put first, accidently or intentionally, students may be more drawn to picking up a fruit (to fill the almost empty plate). They may not have gotten a fruit if the fruit section was way at the end, when they had already filled their plate with Mac and Cheese and Pizza. 
 
 > An interesting aside here is that we actually can't tell which way we're nudging until we're nudging - a case for A/B testing. Extending the cafeteria example, it's possible that putting the fruit at the beginning with the intention of having more students grab fruit actually lower the fruit consumption, because the hungry students blast right past it over to the filling pasta section. *Everything* is a nudge, it just depends on if we're utilizing it intentionally or not.
