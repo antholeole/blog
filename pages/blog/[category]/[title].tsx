@@ -13,33 +13,40 @@ import { MarkdownTransformer, imageTransformer } from '../../../helpers/md_trans
 import remarkMath from 'remark-math'
 import remarkGfm from 'remark-gfm'
 import rehypeKatex from 'rehype-katex'
+import CryptoJS from 'crypto-js'
+import { useState } from 'react'
+import { DECRYPT_PREFIX } from '../../../helpers/constants'
+import DecryptBox from '../../../components/post/decrypt'
 
 const BlogPost = ({ post, meta, titleSlug, category }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const title = postTitle(titleSlug, meta.title)
+
+  const [content, setContent] = useState<string>(post)
 
   return (
     <Layout title={title}>
       <article className="w-100">
         <Breadcrumb>
-        <Link href="/blog" passHref>
-          <Breadcrumb.Item href="#">Blog</Breadcrumb.Item>
-        </Link>
-        <Link href={`/blog/${category}`} passHref>
-          <Breadcrumb.Item href="#">{capitalizeWords(category)}</Breadcrumb.Item>
-        </Link>
-        <Link href={`/blog/${category}/${titleSlug}`} passHref>
-          <Breadcrumb.Item href="#">{title}</Breadcrumb.Item>
-        </Link>
+          <Link href="/blog" passHref>
+            <Breadcrumb.Item href="#">Blog</Breadcrumb.Item>
+          </Link>
+          <Link href={`/blog/${category}`} passHref>
+            <Breadcrumb.Item href="#">{capitalizeWords(category)}</Breadcrumb.Item>
+          </Link>
+          <Link href={`/blog/${category}/${titleSlug}`} passHref>
+            <Breadcrumb.Item href="#">{title}</Breadcrumb.Item>
+          </Link>
         </Breadcrumb>
         <h1>{title}</h1>
         {meta.date && <sub>{meta.date}</sub>}
-        <ReactMarkdown 
-          components={MarkdownTransformer} 
+        {meta.password && <DecryptBox encryptedPost={post} onDecrypted={setContent} />}
+        <ReactMarkdown
+          components={MarkdownTransformer}
           transformImageUri={(src) => imageTransformer(src, titleSlug, category)}
           remarkPlugins={[remarkMath, remarkGfm]}
           rehypePlugins={[rehypeKatex]}
         >
-            {post}
+          {content}
         </ReactMarkdown>
       </article>
     </Layout>
@@ -53,12 +60,25 @@ export const getStaticProps: GetStaticProps<
 > = async ({ params }) => {
   const { category, title } = params as { category: string, title: string }
 
+  const meta = JSON.parse(readFileSync(join(process.cwd(), 'blog', category, title, 'meta.json')).toString()) as IMeta
+
+  let post: string
+  const unencrypted = readFileSync(join(process.cwd(), 'blog', category, title, 'content.md')).toString()
+  if (meta.password) {
+    post = CryptoJS.AES.encrypt(DECRYPT_PREFIX + unencrypted, meta.password as unknown as string).toString()
+  } else {
+    post = unencrypted
+  }
+
   return {
     props: {
       titleSlug: title,
       category,
-      post: readFileSync(join(process.cwd(), 'blog', category, title, 'content.md')).toString(),
-      meta: JSON.parse(readFileSync(join(process.cwd(), 'blog', category, title, 'meta.json')).toString())
+      post,
+      meta: {
+        ...meta,
+        password: !!meta.password
+      }
     },
   }
 }

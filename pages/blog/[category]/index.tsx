@@ -9,6 +9,7 @@ import { IMeta } from '../../../helpers/types'
 import { readFileSync } from 'fs'
 import { join } from 'path'
 import { Breadcrumb, FloatingLabel, Form, FormControl } from 'react-bootstrap'
+import { LockFill } from 'react-bootstrap-icons'
 
 
 export default function CategoryList({ posts }: InferGetStaticPropsType<typeof getStaticProps>) {
@@ -50,10 +51,16 @@ export default function CategoryList({ posts }: InferGetStaticPropsType<typeof g
         ).filter((post) => (post.meta.title ?? post.slug).toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase()))
             .map((post) => (
                 <div key={post.slug} className="py-3">
+                    {
+                        post.meta.password && <div className="d-inline me-1">
+                            <LockFill />
+                        </div>
+                    }
+
                     <Link href={`/blog/${category}/${post.slug}`} passHref>
-                        <a className="link-primary d-block">{post.meta.title ?? post.slug}</a>
+                        <a className="link-primary d-inline-block">{post.meta.title ?? post.slug}</a>
                     </Link>
-                    {post.meta.date && <small className="text-muted">{post.meta.date}</small>}
+                    {post.meta.date && <small className="text-muted d-block">{post.meta.date}</small>}
                 </div>))}
     </Layout>
 }
