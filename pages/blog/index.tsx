@@ -24,7 +24,7 @@ const Home = ({ categories }: InferGetStaticPropsType<typeof getStaticProps>) =>
                     const name = capitalizeWords(v.name.replace(/-/g, ' '))
 
                     return <>
-                    <Card className="mb-3 d-inline-flex" key={v.name}>
+                    <Card className="mb-3 d-inline-flex w-100" key={v.name}>
                         <Card.Body>
                             <Card.Title className="d-flex justify-content-between">
                                 {name}
