@@ -3,20 +3,13 @@
 import Image from 'react-bootstrap/Image'
 import { monthDiff } from '../../../helpers/month_diff'
 import { randomColor } from '../../../helpers/random_color'
+import { ITestimonial } from './testimonial'
 
-interface IMediumTestimonial {
-    username: string
-    likes: number
-    date: Date
-    via?: {
-        href: string,
-        platform: string
-    }
-}
+
 
 export const MediumTestimonial = ({
-    username, likes, children, date, via
-}: React.PropsWithChildren<IMediumTestimonial>) => {
+    username, children, date, via
+}: React.PropsWithChildren<ITestimonial>) => {
     return <div className="testimonial-container">
     <div className="medium-testimonial">
         <div className="picture">

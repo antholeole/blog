@@ -1,14 +1,10 @@
-
-
-import { HandThumbsUpFill, HandThumbsDown } from 'react-bootstrap-icons'
 import { monthDiff } from '../../../helpers/month_diff'
 import { randomColor } from '../../../helpers/random_color'
 import { ITestimonial } from './testimonial'
 
 
-
-export const YoutubeTestimonial = ({
-    username, likes, children, date, via
+export const DiscordTestimonial = ({
+    username, children, date, 
 }: React.PropsWithChildren<ITestimonial>) => {
     return <div className="testimonial-container">
     <div className="youtube-testimonial">
@@ -20,14 +16,8 @@ export const YoutubeTestimonial = ({
         <div className="content">
             <h3 className="name">{username}<span className="date">{monthDiff(date)} months ago</span></h3>
             {children}
-            <div className="icons">
-                <HandThumbsUpFill />
-                <p className='like-count'>{likes}</p>
-                <HandThumbsDown />
-                <p className='reply'>REPLY</p>
-            </div>
         </div>
     </div>
-    {via && <small className="via">via <a href={via.href}>{via.platform}</a></small>}
+    <small className="via">via Discord (with permission)</small>
     </div>
 }
