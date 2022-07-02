@@ -1,7 +1,7 @@
 import { platform } from 'os'
 import { Accordion } from 'react-bootstrap'
 import { Layout } from '../../components/layout/layout'
-import { DiscordTestimonial } from '../../components/resume/testimonial/discord_testimonial'
+import { DmTestimonial } from '../../components/resume/testimonial/dm_testimonial'
 import { MediumTestimonial } from '../../components/resume/testimonial/medium_testimonial'
 import { YoutubeTestimonial } from '../../components/resume/testimonial/youtube_testimonial'
 
@@ -65,12 +65,12 @@ const Resume = () => {
             <Accordion.Item eventKey="1">
                 <Accordion.Header>Testimonials</Accordion.Header>
                 <Accordion.Body>
-                    <DiscordTestimonial
+                    <DmTestimonial
                         username={'Runlong Zhang'}
                         date={new Date('04/14/2022')}                   
                     >  
                     hey, i just want to say, i really appreciate you responding to my message so quickly and offering really good help definitely one of the best teammates i{'\''}ve had
-                    </DiscordTestimonial>
+                    </DmTestimonial>
                     <YoutubeTestimonial
                         username={'Nathaniel Woodbury'}
                         date={new Date('3/1/21')}
