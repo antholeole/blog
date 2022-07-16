@@ -1,25 +1,38 @@
 import type { NextPage } from 'next'
+import Link from 'next/link'
 import Image from 'react-bootstrap/Image'
 import { Layout } from '../components/layout/layout'
 
 const Home: NextPage = () => {
   return (
     <Layout>
-   <div className="p-5 bg-light">
+      <div className="p-5 bg-light">
         <div className="container-fluid py-5 d-flex flex-column text-center">
-              <div>
-                <Image src="/memojis/fistbump.png" alt="A emoji of Anthony" width="150" height="150" />
-              </div>
-            <h1 className="display-5 fw-bold">
-              Anthony Oleinik
-              </h1>
-            <p className="fs-5">
-              If you&lsquo;re here - welcome to my tiny corner of the internet.
-              <br />
-              Many of this was written with no end reader in mind, but feel free to be the end reader if you&lsquo;d like!
-            </p>
+          <div>
+            <Image src="/memojis/fistbump.png" alt="A emoji of Anthony" width="150" height="150" />
+          </div>
+          <h1 className="display-5 fw-bold">
+            Anthony Oleinik
+          </h1>
+          <p className="fs-5">
+            If you&lsquo;re here - welcome to my tiny corner of the internet.
+            <br />
+            Many of this was written with no end reader in mind, but feel free to be the end reader if you&lsquo;d like!
+          </p>
+          <ul>
+            <li className="list-unstyled">
+              <Link href="/resume" passHref>
+                <a>Résumé</a>
+              </Link>
+            </li>
+            <li className="list-unstyled">
+              <Link href="/blog" passHref>
+                <a>Blog</a>
+              </Link>
+            </li>
+          </ul>
         </div>
-    </div>
+      </div>
     </Layout>
   )
 }
