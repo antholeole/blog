@@ -1,6 +1,6 @@
 Good morning!
 
-Today's problem was [Decode String](https://competitive programming.com/problems/decode-string/solution/).
+Today's problem was [Decode String](https://leetcode.com/problems/decode-string/solution/).
 
 If you've seen any open bracket problem before, I think this one is pretty intuitive! Something like "tell me if this is a valid bracket (i.e. the same open as close): (())" - the solution is trivially to use a stack, and for every open bracket, push it on the stack; for every closed, pop. if you ever pop and the length is 0, return false; if at the end, we end up with brackets on the stack, return 0.
 

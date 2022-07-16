@@ -1,6 +1,6 @@
 I think it's fitting that my first competitive programming session on this journey is a confidence booster.
 
-[Here's the link the the problem](https://competitive programming.com/problems/minimum-value-to-get-positive-step-by-step-sum/submissions/).
+[Here's the link the the problem](https://leetcode.com/problems/minimum-value-to-get-positive-step-by-step-sum/submissions/).
 
 The intuition here is that we're adding the numbers in nums LTR gives us a running total graph, and we want to add the lowest constant to the starting point of the graph that the absolute minimum is equal to one.
 

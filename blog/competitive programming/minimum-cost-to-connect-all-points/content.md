@@ -1,4 +1,4 @@
-The problem can be found [here](https://competitive programming.com/problems/min-cost-to-connect-all-points/).
+The problem can be found [here](https://leetcode.com/problems/min-cost-to-connect-all-points/).
 
 First, a summary: Kruskal's is quite simple in the way that the algorithm is quite intuitive. In general, we just want to connect all nodes by the shortest possible path. We can find the shortest paths by finding _all_ paths, and then sorting to find the shortest paths. But wait! What if a node has the top two shortest paths to another node? Aren't we connecting it to the spanning tree redundantly? Yes! So we need to keep track of all the nodes that we already are connected to. We'll do this by using a union find.
 

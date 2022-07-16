@@ -1,4 +1,4 @@
-First off, here's [the link the problem](https://competitive programming.com/problems/daily-temperatures/).
+First off, here's [the link the problem](https://leetcode.com/problems/daily-temperatures/).
 
 The trivial solution for this one is... well, trivial! All we need to do is look ahead from each element, and then stop iterating on the first element greater than the current element. This is an easy solution, so I coded it up pretty quickly:
 

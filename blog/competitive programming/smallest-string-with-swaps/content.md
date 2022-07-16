@@ -1,4 +1,4 @@
-[The problem!](https://competitive programming.com/problems/smallest-string-with-swaps/)
+[The problem!](https://leetcode.com/problems/smallest-string-with-swaps/)
 
 Essentially, the problem here is that you're given a string, and you can swap any paired characters. You should return the lexicographically smallest string.
 
