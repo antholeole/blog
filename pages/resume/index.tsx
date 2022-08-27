@@ -9,7 +9,7 @@ const Resume = () => {
     return <Layout>
         <h2>Anthony{'\''}s Resume</h2>
         <ul>
-            <li><a href="https://docs.google.com/document/d/1ItpihRe3mluA8HYJxQgpoTlDwZ4R3GfQcEmMwioKCeQ/edit?usp=sharing">1 Page Resume</a></li>
+            <li><a href="https://docs.google.com/document/d/1GtFB8PgPFZc9XhADliExEkF4Be4qtsBGYWVJ7DFhOcw/edit?usp=sharing">1 Page Resume</a></li>
             <li><a href="https://www.linkedin.com/in/anthony-oleinik/">Linkedin</a></li>
             <li><a href="https://github.com/antholeole">GitHub</a></li>
             <li><a href="https://www.youtube.com/channel/UCvJ5P5wul44NbZeH_qJTdJw">Youtube</a></li>
@@ -67,8 +67,8 @@ const Resume = () => {
                 <Accordion.Body>
                     <DmTestimonial
                         username={'Runlong Zhang'}
-                        date={new Date('04/14/2022')}                   
-                    >  
+                        date={new Date('04/14/2022')}
+                    >
                     hey, i just want to say, i really appreciate you responding to my message so quickly and offering really good help definitely one of the best teammates i{'\''}ve had
                     </DmTestimonial>
                     <YoutubeTestimonial
@@ -124,7 +124,7 @@ const Resume = () => {
                             <li>Top 50 writer in tech, Top 500 writer on entire Medium platform.</li>
                             <li>Consistent writer for top programming publications.</li>
                             <li>~604,000 views and ~2,000 likes across 20 articles since Nov, 2020.</li>
-                        </ul> 
+                        </ul>
                 </Accordion.Body>
             </Accordion.Item>
         </Accordion>
