@@ -1,9 +1,16 @@
-import type { NextPage } from 'next'
+import { readFileSync } from 'fs'
+import type { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next'
 import Link from 'next/link'
+import path from 'path'
 import Image from 'react-bootstrap/Image'
 import { Layout } from '../components/layout/layout'
 
-const Home: NextPage = () => {
+const Home = ({ quotes }: InferGetStaticPropsType<typeof getStaticProps>) => {
+
+  const today = new Date(Date.now())
+  today.setHours(0, 0, 0, 0)
+  const todaysQuote = quotes[today.getTime() % quotes.length]
+
   return (
     <Layout>
       <div className="p-5 bg-light">
@@ -11,25 +18,18 @@ const Home: NextPage = () => {
           <div>
             <Image src="/memojis/fistbump.png" alt="A emoji of Anthony" width="150" height="150" />
           </div>
-          <h1 className="display-5 fw-bold">
+          <h1 className="display-5 fw-bold pb-3">
             Anthony Oleinik
           </h1>
-          <p className="fs-5">
-            If you&lsquo;re here - welcome to my tiny corner of the internet.
-            <br />
-            Many of this was written with no end reader in mind, but feel free to be the end reader if you&lsquo;d like!
+          <hr/>
+          <small>today&apos;s quote:</small>
+
+          <p>
+            {todaysQuote.quote}
           </p>
+          <small><b>- {todaysQuote.author}</b></small>
+
           <ul>
-            <li className="list-unstyled">
-              <Link href="/resume" passHref>
-                <a>Résumé</a>
-              </Link>
-            </li>
-            <li className="list-unstyled">
-              <Link href="/blog" passHref>
-                <a>Blog</a>
-              </Link>
-            </li>
           </ul>
         </div>
       </div>
@@ -38,3 +38,17 @@ const Home: NextPage = () => {
 }
 
 export default Home
+
+export const getStaticProps: GetStaticProps<{
+  quotes: {
+    quote: string;
+    author: string;
+  }[]
+}> = async () => {
+  const quotes = JSON.parse(readFileSync(path.join(process.cwd(), 'quotes.json')).toString())['quotes']
+
+  return {
+    props: { quotes }
+  }
+}
+
