@@ -19,6 +19,27 @@ const Resume = () => {
             <Accordion.Item eventKey="0">
                 <Accordion.Header>Work Experience</Accordion.Header>
                 <Accordion.Body>
+                    <h3>Google</h3>
+                    <small>Summer 2022</small>
+                    <br />
+                    <small>
+                        Software Engineer Intern
+                        Text Editing Magnifying Glass
+                    </small>
+                    <br />
+                    <small>
+                        Flutter Team - San Francisco
+                    </small>
+                    <hr />
+                    <p>
+                    Leveraged low-level Skia API to implement a text editing magnifying glass feature for text editing accessibility, the #8 highest user-upvoted text editing issue in the top-2o most starred github repo of all time, Google’s UI framework, Flutter. Shipped this highly requested feature to millions of global users.
+                    </p>
+                    <ul>
+                        <li>Produced and championed design doc. Received team approval for user facing API and design details.</li>
+                        <li>Landed Pull Requests that include expanding testing API’s,  platform fidelity details. Reviewed community contributions.</li>
+                    </ul>
+                    <b>Tools and technologies used:</b> Flutter, Dart
+                    <hr />
                     <h3>Amazon</h3>
                     <small>Summer 2021</small>
                     <br />
@@ -69,7 +90,7 @@ const Resume = () => {
                         username={'Runlong Zhang'}
                         date={new Date('04/14/2022')}
                     >
-                    hey, i just want to say, i really appreciate you responding to my message so quickly and offering really good help definitely one of the best teammates i{'\''}ve had
+                        hey, i just want to say, i really appreciate you responding to my message so quickly and offering really good help definitely one of the best teammates i{'\''}ve had
                     </DmTestimonial>
                     <YoutubeTestimonial
                         username={'Nathaniel Woodbury'}
@@ -103,7 +124,7 @@ const Resume = () => {
                 <Accordion.Body>
                     <h3>Programming:</h3>
                     <ul>
-                        <li>Languages: Python, Java, Rust, TS/JS</li>
+                        <li>Languages: Go, Python, Java, Rust, TS/JS</li>
                         <li>
                             Web Services: Proficient in AWS. Experience in (non-exhaustively): SNS, EC2, ECS, Glue, Lambda, Step fns, RDS, IAM
                         </li>
@@ -114,17 +135,17 @@ const Resume = () => {
                             Database: Postgres, MySQL
                         </li>
                         <li>
-                            Others: Parallelization + Concurrency, GraphQL, React, Spring
+                            Others: Parallelization + Concurrency, GraphQL, React, Spring, Containerization (Docker, Docker Compose)
                         </li>
                     </ul>
                     <hr />
                     <h3>Technical Communication:</h3>
-                        <ul>
-                            <li> Post on a medium blog about tech (https://anth-oleinik.medium.com/).</li>
-                            <li>Top 50 writer in tech, Top 500 writer on entire Medium platform.</li>
-                            <li>Consistent writer for top programming publications.</li>
-                            <li>~604,000 views and ~2,000 likes across 20 articles since Nov, 2020.</li>
-                        </ul>
+                    <ul>
+                        <li> Post on a medium blog about tech (https://anth-oleinik.medium.com/).</li>
+                        <li>Top 50 writer in tech, Top 500 writer on entire Medium platform.</li>
+                        <li>Consistent writer for top programming publications.</li>
+                        <li>~604,000 views and ~2,000 likes across 20 articles since Nov, 2020.</li>
+                    </ul>
                 </Accordion.Body>
             </Accordion.Item>
         </Accordion>
