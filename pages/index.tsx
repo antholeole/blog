@@ -1,6 +1,5 @@
 import { readFileSync } from 'fs'
-import type { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next'
-import Link from 'next/link'
+import type { GetStaticProps, InferGetStaticPropsType } from 'next'
 import path from 'path'
 import Image from 'react-bootstrap/Image'
 import { Layout } from '../components/layout/layout'
@@ -9,7 +8,8 @@ const Home = ({ quotes }: InferGetStaticPropsType<typeof getStaticProps>) => {
 
   const today = new Date(Date.now())
   today.setHours(0, 0, 0, 0)
-  const todaysQuote = quotes[today.getTime() % quotes.length]
+  const dayOfYear = today.getUTCDate() + (today.getUTCMonth() * 31)
+  const todaysQuote = quotes[dayOfYear % quotes.length]
 
   return (
     <Layout>
