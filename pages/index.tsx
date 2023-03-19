@@ -22,8 +22,6 @@ const Home = ({ quotes }: InferGetStaticPropsType<typeof getStaticProps>) => {
             Anthony Oleinik
           </h1>
           <hr/>
-          <small>today&apos;s quote:</small>
-
           <p>
             {todaysQuote.quote}
           </p>

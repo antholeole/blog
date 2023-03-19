@@ -10,14 +10,9 @@ import { capitalizeWords } from '../../helpers/capitalize_words'
 import ReactMarkdown from 'react-markdown'
 
 const Home = ({ categories }: InferGetStaticPropsType<typeof getStaticProps>) => {
-    
-
     return (
         <Layout>
             <h3>Welcome to the Blog!</h3>
-            <p>
-                I hope you find something interesting :)
-            </p>
             <h4>Blog Categories:</h4>
             <div className="multi-column">
                 {categories.map((v) => {
@@ -35,7 +30,7 @@ const Home = ({ categories }: InferGetStaticPropsType<typeof getStaticProps>) =>
                                 </Badge>
                             </Card.Title>
                             <Card.Text as="article">
-                                <ReactMarkdown>{v.summary}</ReactMarkdown>  
+                                <ReactMarkdown>{v.summary}</ReactMarkdown>
                             </Card.Text>
                             <Link href={`/blog/${v.name}`} passHref>
                             <Button variant="primary">{`read about ${name}`}</Button>
@@ -43,7 +38,7 @@ const Home = ({ categories }: InferGetStaticPropsType<typeof getStaticProps>) =>
                         </Card.Body>
                     </Card>
                 </>})
-                }  
+                }
             </div>
         </Layout>
     )

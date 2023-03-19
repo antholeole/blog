@@ -1,9 +1,6 @@
 import { platform } from 'os'
 import { Accordion } from 'react-bootstrap'
 import { Layout } from '../../components/layout/layout'
-import { DmTestimonial } from '../../components/resume/testimonial/dm_testimonial'
-import { MediumTestimonial } from '../../components/resume/testimonial/medium_testimonial'
-import { YoutubeTestimonial } from '../../components/resume/testimonial/youtube_testimonial'
 
 const Resume = () => {
     return <Layout>
@@ -81,42 +78,6 @@ const Resume = () => {
                         <li>Daily standups, bi-weekly feature demos to senior management.</li>
                     </ul>
                     <b>Tools and technologies used:</b> React (JS), Springboot, Jira, Github,  AWS
-                </Accordion.Body>
-            </Accordion.Item>
-            <Accordion.Item eventKey="1">
-                <Accordion.Header>Testimonials</Accordion.Header>
-                <Accordion.Body>
-                    <DmTestimonial
-                        username={'Runlong Zhang'}
-                        date={new Date('04/14/2022')}
-                    >
-                        hey, i just want to say, i really appreciate you responding to my message so quickly and offering really good help definitely one of the best teammates i{'\''}ve had
-                    </DmTestimonial>
-                    <YoutubeTestimonial
-                        username={'Nathaniel Woodbury'}
-                        date={new Date('3/1/21')}
-                        via={{
-                            href: 'https://www.youtube.com/watch?v=XjkB_O_rRgc&lc=Ugz_plZivIiszeZyAjp4AaABAg',
-                            platform: 'Youtube Comments'
-                        }}
-                        likes={4}
-                    >
-                        <p>
-                            Oh my god thank you so much, this quality of content for free is so incredible, especially considering rust videos are so rare. Thank you so much!
-                        </p>
-                        <br />
-                        <p>
-                            How long have you been working with rust? Your clarity and understanding for it is so high and the code you write is very clean. This video had such incredible explanations and was so clear!
-                        </p>
-                    </YoutubeTestimonial>
-                    <MediumTestimonial username={'Azalea Kemp'} likes={1} date={new Date('2/1/21')} via={{
-                        href: 'https://levelup.gitconnected.com/how-to-keep-your-footer-at-the-bottom-of-the-page-the-easy-way-20aa3bcd621f',
-                        platform: 'Medium.com'
-                    }}>
-                        <p>
-                            just want to say this post was extremely helpful! Like StackOverflow, but with a proper (and well broken down) explanation! Looking forward to reading more of your writing :)
-                        </p>
-                    </MediumTestimonial>
                 </Accordion.Body>
             </Accordion.Item>
             <Accordion.Item eventKey="2">
