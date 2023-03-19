@@ -1,45 +1,46 @@
 import type { GetStaticProps, InferGetStaticPropsType } from 'next'
+import { useRouter } from 'next/dist/client/router'
 import Link from 'next/link'
-import path from 'path'
-import React from 'react'
+import { FormEventHandler, useState } from 'react'
 import { Layout } from '../../components/layout/layout'
-import { getBlogCategories, categoriesPath } from '../../helpers/get_posts'
-import { readFileSync, readdirSync } from 'fs'
-import { Badge, Button, Card } from 'react-bootstrap'
-import { capitalizeWords } from '../../helpers/capitalize_words'
-import ReactMarkdown from 'react-markdown'
+import { getBlogCategories, getPosts } from '../../helpers/get_posts'
+import { Form } from 'react-bootstrap'
+import { LockFill } from 'react-bootstrap-icons'
 
-const Home = ({ categories }: InferGetStaticPropsType<typeof getStaticProps>) => {
+
+const Home = ({ categories, posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
+    const { query } = useRouter()
+    const [category, setCategory] = useState(query.category ?? '')
+
+    const submitted: FormEventHandler<HTMLSelectElement> = (event) => {
+        event.preventDefault()
+        console.log(event.currentTarget.value)
+        setCategory(event.currentTarget.value)
+    }
+
     return (
         <Layout>
             <h3>Welcome to the Blog!</h3>
-            <h4>Blog Categories:</h4>
-            <div className="multi-column">
-                {categories.map((v) => {
-                    const name = capitalizeWords(v.name.replace(/-/g, ' '))
+            <Form.Select size="lg" className="me-2" onChange={submitted} aria-label="Select Category" defaultValue={category}>
+                <option value="">Filter by Category...</option>
+                {categories.map(category => <option key={category} value={category}>{category}</option>)}
+            </Form.Select>
+            {posts.sort((a, b) =>
+                new Date(b.meta.date!).valueOf() - new Date(a.meta.date!).valueOf()
+            ).filter((post) => category === '' || (post.category) === category)
+                .map((post) => (
+                    <div key={post.slug} className="py-3">
+                        {
+                            post.meta.password && <div className="d-inline me-1">
+                                <LockFill />
+                            </div>
+                        }
 
-                    return <>
-                    <Card className="mb-3 d-inline-flex w-100" key={v.name}>
-                        <Card.Body>
-                            <Card.Title className="d-flex justify-content-between">
-                                {name}
-                                <Badge bg="secondary">
-                                        <span className="font-weight-normal">
-                                            {v.size}
-                                        </span>
-                                </Badge>
-                            </Card.Title>
-                            <Card.Text as="article">
-                                <ReactMarkdown>{v.summary}</ReactMarkdown>
-                            </Card.Text>
-                            <Link href={`/blog/${v.name}`} passHref>
-                            <Button variant="primary">{`read about ${name}`}</Button>
-                            </Link>
-                        </Card.Body>
-                    </Card>
-                </>})
-                }
-            </div>
+                        <Link href={`/blog/${post.category}/${post.slug}`} passHref>
+                            <a className="link-primary d-inline-block">{post.meta.title ?? post.slug}</a>
+                        </Link>
+                        {post.meta.date && <small className="text-muted d-block">{post.meta.date}</small>}
+                    </div>))}
         </Layout>
     )
 }
@@ -47,25 +48,14 @@ const Home = ({ categories }: InferGetStaticPropsType<typeof getStaticProps>) =>
 export default Home
 
 export const getStaticProps: GetStaticProps<{
-    categories: {
-        name: string;
-        summary: string;
-        size: number;
-    }[]
-}> = async () => {
-    const categories = getBlogCategories()
-        .map((category) => ({
-            name: category,
-            size: readdirSync(path.join(categoriesPath, category)).length - 1,
-            summary: readFileSync(
-                path.join(categoriesPath, category, 'summary.md')
-            ).toString()
-        }))
+    posts: ReturnType<typeof getPosts>,
+    categories: ReturnType<typeof getBlogCategories>,
+}> = async () => ({
+    props: {
+        posts: getPosts(),
+        categories: getBlogCategories()
+    },
+})
 
 
-    return {
-        props: {
-            categories
-        },
-    }
-}
+
