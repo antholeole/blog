@@ -6,7 +6,7 @@
     "build": "node write.js"
   },
   "devDependencies": {
-    "marked": "8.0.0"
+    "marked": "4.0.0"
   },
   "author": "",
   "license": "ISC"
