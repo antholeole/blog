@@ -1,1 +1,0 @@
-My competitive programming ride along! I'm not a serious competitive programmer, but I do enjoy the problem solving it takes. I write about some competitive programming problems that I particularly enjoy.
