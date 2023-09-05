@@ -12,7 +12,7 @@ fs.readdirSync("./blog").forEach(file => {
     if (filetype == "md") {
         const md = fs.readFileSync(`./blog/${file}`, "utf-8")
         const html = marked.parse(md)
-        const output = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="/index.css"><title>Anthony Oleinik - ${fileName}</title></head> <body>${html}</body></html>`
+        const output = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="index.css"><title>Anthony Oleinik - ${fileName}</title></head> <body><main id="contents">${html}</main></body></html>`
 
         fs.writeFileSync(`./out/${fileName}.html`, output)
     } else {
