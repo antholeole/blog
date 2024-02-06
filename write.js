@@ -20,6 +20,7 @@ const fileToMd = (input) => {
         const html = marked.parse(md)
 
         const output = genOutput(fileName, html)
+        console.log(output)
 
         fs.writeFileSync(`${outPath}/${path}/${fileName}.html`, output)
     } else {
