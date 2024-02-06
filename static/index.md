@@ -4,7 +4,7 @@
 
 Currently working on distributed systems at Google.
 
-[blog posts](blog_directory.md)
+[blog posts](blog_directory)
 
 
 ## Employment History
