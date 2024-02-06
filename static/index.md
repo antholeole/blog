@@ -4,6 +4,8 @@
 
 Currently working on distributed systems at Google.
 
+[blog posts](blog_directory.md)
+
 
 ## Employment History
 ### Google. 2022-Current

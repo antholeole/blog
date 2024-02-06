@@ -2,20 +2,45 @@ const marked = require("marked")
 const fs = require("fs")
 
 fs.mkdir("./out", () => { })
-fs.readdirSync("./blog").forEach(file => {
-    if (file === ".gitkeep") {
-        return
-    }
 
-    const [fileName, filetype] = file.split(".");
+const staticPath = "./static/"
+const outPath = "./out/"
+
+const genOutput = (fileName, html) => {
+    return `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="index.css"><title>Anthony Oleinik - ${fileName}</title></head> <body><main id="contents">${html}</main></body></html>`
+}
+
+const fileToMd = (input) => {
+    const [path, file] = input.split(staticPath)
+    console.log(path, file, input)
+    const [fileName, filetype] = file.split(".")
 
     if (filetype == "md") {
-        const md = fs.readFileSync(`./blog/${file}`, "utf-8")
+        const md = fs.readFileSync(`${staticPath}/${file}`, "utf-8")
         const html = marked.parse(md)
-        const output = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="index.css"><title>Anthony Oleinik - ${fileName}</title></head> <body><main id="contents">${html}</main></body></html>`
 
-        fs.writeFileSync(`./out/${fileName}.html`, output)
+        const output = genOutput(fileName, html)
+
+        fs.writeFileSync(`${outPath}/${path}/${fileName}.html`, output)
     } else {
-        fs.copyFileSync(`./blog/${file}`, `./out/${file}`)
+        fs.copyFileSync(`${staticPath}${path}/${file}`, `${outPath}/${path}/${file}`)
     }
-});
+}
+
+const traverseBlog = (path) => {
+    fs.readdirSync(path).forEach(fsItem => {
+        const fq = `${path}/${fsItem}`
+        const isDir = fs.lstatSync(fq).isDirectory()
+
+        if (isDir) {
+            const dir = `${outPath}${fq}`.replace(staticPath, "")
+            fs.mkdirSync(dir, () => {})
+            traverseBlog(fq)
+        } else {
+            fileToMd(fq)
+        }
+    });
+}
+
+traverseBlog("./static")
+
