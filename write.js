@@ -23,7 +23,7 @@ const fileToMd = (input) => {
 
         fs.writeFileSync(`${outPath}/${path}/${fileName}.html`, output)
     } else {
-        fs.copyFileSync(`${staticPath}${path}/${file}`, `${outPath}/${path}/${file}`)
+        fs.copyFileSync(`${staticPath}${path}/${file}`, `${outPath}${path}/${file}`)
     }
 }
 
@@ -41,6 +41,11 @@ const traverseBlog = (path) => {
         }
     });
 }
+
+try {
+    fs.rmdirSync(outPath, {recursive: true, force: true})
+} catch (e) {}
+fs.mkdirSync(outPath, () => {})
 
 traverseBlog("./static")
 
