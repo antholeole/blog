@@ -11,6 +11,10 @@
         inherit inputs pkgs;
         modules = [
           ({ pkgs, ... }: {
+            packages = with pkgs; [
+              miniserve
+            ];
+
             languages.javascript = {
               enable = true;
               corepack.enable = true;

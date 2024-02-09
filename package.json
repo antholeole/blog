@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "node write.js"
+    "build": "node write.js",
+    "dev": "miniserve out"
   },
   "devDependencies": {
     "marked": "4.0.0"
