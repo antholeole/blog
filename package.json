@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "build": "node write.js",
-    "dev": "miniserve out"
+    "dev": "watchexec --watch static -r 'npm run build && miniserve out'"
   },
   "devDependencies": {
     "marked": "4.0.0"

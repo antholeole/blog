@@ -10,9 +10,12 @@ Currently working on distributed systems at Google.
 ## Employment History
 ### Google. 2022-Current
 **RTDB - San Francisco**
+
+_technologies used:_ C++. Golang. Docker. Nix. GCP. Chef. Terraform. 
+
 - 'Real Time Database' promises sub 10ms queries and subscriptions to users. Maintained SLA for over 400k average concurrents.
 - Designed and implemented self-healing process by determining which servers are freshly healthy and inserting them back into rotation. Lowered routine pages by over 66%.
-- Designed and implemented data malformation anomaly detection system that verifies and sustains data integrity at rest for over half a petabyte of customer data.
+- Designed, implemented, and lead project to data malformation anomaly detection system that verifies and sustains data integrity at rest for over half a petabyte of customer data.
 
 ### Amazon. Summer 2021
 **Consumer Trust and Protection Services Division - Seattle, Remote**
