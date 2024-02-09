@@ -10,8 +10,9 @@ Currently working on distributed systems at Google.
 ## Employment History
 ### Google. 2022-Current
 **RTDB - San Francisco**
-- 'Real Time Database' promises sub 10ms queries and subscriptions to users. Runs on a bespoke cluster management system (like k8's, but homemade). 
-- I contributed to the self-healing process by determining which servers are freshly healthy and inserting them back into rotation, repopulating them with clients.
+- 'Real Time Database' promises sub 10ms queries and subscriptions to users. Maintained SLA for over 400k average concurrents.
+- Designed and implemented self-healing process by determining which servers are freshly healthy and inserting them back into rotation. Lowered routine pages by over 66%.
+- Designed and implemented data malformation anomaly detection system that verifies and sustains data integrity at rest for over half a petabyte of customer data.
 
 ### Amazon. Summer 2021
 **Consumer Trust and Protection Services Division - Seattle, Remote**
