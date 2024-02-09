@@ -32,7 +32,7 @@ Currently working on distributed systems at Google.
 ## Projects
 - [Contributor to DGS](https://github.com/Netflix/dgs-framework/pulls?q=is%3Apr+sort%3Aupdated-desc+is%3Aclosed+author%3Aantholeole), Netflix's graphQL server framework
 - [My nix configuration](https://github.com/antholeole/nixconfig): fully reproduceable nix configuration for personal devices
-- [Flutter contributor](https://github.com/flutter/flutter/pulls?q=is%3Apr+sort%3Aupdated-desc+author%3Aantholeole+is%3Aclosed): Leveraged low-level Skia API to implement a text editing magnifying glass feature for text editing accessibility, the #8 highest user-upvoted text editing issue in the top-2o most starred github repo of all time, Google’s UI framework, Flutter. Shipped this highly requested feature to millions of global users. 
+- [Flutter contributor](https://github.com/flutter/flutter/pulls?q=is%3Apr+sort%3Aupdated-desc+author%3Aantholeole+is%3Aclosed): Leveraged low-level Skia API to implement a text editing magnifying glass feature for text editing accessibility, the #8 highest user-upvoted text editing issue in the top-20 most starred github repo of all time, Google’s UI framework, Flutter. Shipped this highly requested feature to millions of global users. 
 
 
 
