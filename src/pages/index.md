@@ -1,7 +1,7 @@
 ---
 title: Anthony Oleinik
 description: Anthony Olenik's Personal Website
-layout: ../components/Layout.astro
+layout: ../components/BlogLayout.astro
 ---
 
 # Anthony Oleinik

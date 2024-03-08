@@ -10,9 +10,13 @@ const { title, description } = Astro.props;
 		<BaseHead title={title} description={description} />
 	</head>
 
-	<body>
+	<body>		
 		<article>
-            <slot />
+			<h1>{title}</h1>
+			<slot name="subheader" />
+			<section>
+	            <slot />
+			</section>
         </article>
 	</body>
 </html>
