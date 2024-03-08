@@ -1,8 +1,5 @@
 ---
-import type { CollectionEntry } from 'astro:content';
 import BaseHead from './BaseHead.astro';
-import FormattedDate from './FormattedDate.astro';
-
 
 const { title, description } = Astro.props;
 ---
@@ -15,9 +12,7 @@ const { title, description } = Astro.props;
 
 	<body>
 		<article>
-            <section>
             <slot />
-            </section>
         </article>
 	</body>
 </html>
