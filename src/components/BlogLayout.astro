@@ -3,17 +3,13 @@ import type { CollectionEntry } from 'astro:content';
 import FormattedDate from '../components/FormattedDate.astro';
 import Layout from './Layout.astro';
 
-type Props = Omit<CollectionEntry<'blog'>['data'], "pubDate"> & {
-	pubDate: Date | undefined
-};
+type Props = CollectionEntry<'blog'>['data']
 
 const { pubDate, title } = Astro.props;
 ---
 
 <Layout title={title}>
-	{pubDate !== undefined && 
 		<small slot="subheader"><FormattedDate date={pubDate}/></small>
-	}
 	<slot />
 </Layout>
 
