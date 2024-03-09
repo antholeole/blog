@@ -8,7 +8,6 @@ const parenRegexp = /\([^\)]+\)/
 export const remarkAside: Plugin<any> = () => {
     return (tree: Node) => {
         visit(tree, 'paragraph', (paragraphNode: Parent) => {
-            const replacementChildren = []
             for (let child of paragraphNode.children) {
                 if (child.type !== 'text') {
                     return
@@ -41,8 +40,13 @@ export const remarkAside: Plugin<any> = () => {
                         if (parenDepth === 0) {
                             textParts.push({
                                 type: "element",
-                                tagName: "span",
                                 children: [{ type: "text", value: currentSpan }],
+                                data: {
+                                    hName: "span",
+                                    hProperties: {
+                                        className: ["sidenote"]
+                                    }
+                                }
                             })
 
                             currentSpan = ""
@@ -58,7 +62,6 @@ export const remarkAside: Plugin<any> = () => {
 
                 // if it DOES equal one, we don't want to touch it.
                 if (textParts.length !== 1) {
-                    paragraphNode.type = "parent"
                     paragraphNode.children = textParts as any
                 }
             }

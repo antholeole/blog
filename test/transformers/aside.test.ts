@@ -17,8 +17,16 @@ test('should process a paren as an aside', async () => {
 
 	const out = await testRemarkPlugin(md, [remarkAside])
 
-	
 	expect(out).toEqual("<p>Hello! <span class=\"sidenote\">and also...</span> aside.</p>")
+});
+
+
+test('should not double process parents', async () => {
+	const md = `Hello! (and (nested??) also...) aside.`;
+
+	const out = await testRemarkPlugin(md, [remarkAside])
+
+	expect(out).toEqual("<p>Hello! <span class=\"sidenote\">and (nested??) also...</span> aside.</p>")
 });
 
 
