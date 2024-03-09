@@ -12,7 +12,7 @@ That's how I feel about nix, anyway. I have to use Bazel at work (not in a Googl
 
 I've been holding my tongue on a transition to nix as the build system, though (It's not only because of this. Incremental compiles from bazel are also a major blessing - so atleast I have a hard reason for not pushing the switch.): having an estoic language in a codebase just elevates the maintenance burden (I try to run the mental calculation for the long term benefits of non-breaking builds, and when k8's enter the picture the pot sure does look sweeter.).
 
-That being said, I write literally everything I do for my personal self using nix. Roughly four months ago, when I was first learning, I made a Reddit post asking a question. Some very helpful redditors tried to explain **overlays**, but unfortunately I was all too lost in the nix sauce. But perseverance rewarded, I know feel that I am in a good place to start smoothing the on-ramp by throwing small, SEO optimized tidbits into the internet void.
+That being said, I write literally everything I do for my personal self using nix. When I was first trying to learn nix, I made a Reddit post asking a question. Some very helpful redditors tried to explain **overlays**, but unfortunately I was all too lost in the nix sauce. But perseverance rewarded, I know feel that I am in a good place to start smoothing the on-ramp by throwing small, SEO optimized tidbits into the internet void.
 
 ### Overlays
 
@@ -28,7 +28,7 @@ Here are some usecases (Sometimes, I try to find what a feature is useful for. I
 
 Some of those look trivial, but tend to actually really clean things up in practice - if you find yourself prop drilling a package everywhere, it might be time to consider an overlay!
 
-In practice, we see 1 in combination with 2 a lot. A popular example is [rust-overlay](https://github.com/oxalica/rust-overlay), which puts a very specific version of rust in the pkgs, so whenever we talk about rust, we know we mean exactly the rust the overlay applied (It ends up being a ton of boilerplate to get a specific rust nightly without that overlay).
+In practice, we see 1 in combination with 2 a lot. A popular example is [rust-overlay](https://github.com/oxalica/rust-overlay), which puts a very specific version of rust in the pkgs, so whenever we talk about rust, we know we mean exactly the rust the overlay applied (It ends up being a ton of boilerplate to get a specific rust nightly without that overlay.).
 
 The first important tidbit of information is that nix is lazily evaluated. This means that it is perfectly okay to stuff the entire contents of modern development into a massive set, and then pass it to every single nix derivation. The packages don't actually get _built_ until you evalute them; `pkgs` takes no time, but `pkgs.redis` gets you redis!
 
@@ -101,7 +101,6 @@ If you think about it, overlays are pretty aptly named. You have a packageset, a
             # "Prev" is the packageset before the current overlay; this is helpful because we don't
             # have to worry about "retouching" the overlay. For example, if we set `final.a` in the
             # overlay and also use it, it will infinitely evaluate the overlay.
-            # tl;dr feel free to treat prev as pkgs!
             overlays = [(final: prev: {
                 # you create some new package in the overlay,
                 # or modify an old one.
