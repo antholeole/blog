@@ -10,5 +10,10 @@ export default defineConfig({
 	integrations: [mdx(), sitemap()],
 	markdown: {
 		remarkPlugins: [remarkAside],
-	}
+		shikiConfig: {
+			theme: 'solarized-light',
+			langs: [],
+			wrap: true,
+		},
+	},
 });

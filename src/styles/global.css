@@ -175,8 +175,14 @@ blockquote footer {
 
 section>footer,
 section>p,
-section>table {
+section>table,
+section>code,
+section>.astro-code {
     width: 55%
+}
+
+section>.astro-code {
+    padding: 3px;
 }
 
 section>dl,

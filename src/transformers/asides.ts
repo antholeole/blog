@@ -24,13 +24,30 @@ export const remarkAside: Plugin<any> = () => {
                     if (char === "(") {
                         parenDepth++
 
-                        // if we just entered a paren, we should
-                        // push the previous text as a text span.
+                        // if we just entered a paren:
+                        // 1. we should add a label for where this sidenote is going.
+                        // 2. we should push the previous text as a text span.
                         if (parenDepth === 1) {
+                            // remove the space
+                            currentSpan = currentSpan.slice(0, -1)
+
                             textParts.push({
                                 type: "text",
                                 value: currentSpan
                             })
+
+                            // add the label
+                            textParts.push({
+                                type: "element",
+                                data: {
+                                    hName: "label",
+                                    hProperties: {
+                                        className: ["margin-toggle", "sidenote-number"]
+                                    }
+                                }
+                            })
+
+
                             currentSpan = ""
                         } else {
                             currentSpan += char
@@ -49,6 +66,7 @@ export const remarkAside: Plugin<any> = () => {
                                 }
                             })
 
+                            // re-add the space
                             currentSpan = ""
                         } else {
                             currentSpan += char

@@ -17,7 +17,7 @@ test('should process a paren as an aside', async () => {
 
 	const out = await testRemarkPlugin(md, [remarkAside])
 
-	expect(out).toEqual("<p>Hello! <span class=\"sidenote\">and also...</span> aside.</p>")
+	expect(out).toEqual("<p>Hello!<label class=\"margin-toggle sidenote-number\"></label><span class=\"sidenote\">and also...</span> aside.</p>")
 });
 
 
@@ -26,7 +26,7 @@ test('should not double process parents', async () => {
 
 	const out = await testRemarkPlugin(md, [remarkAside])
 
-	expect(out).toEqual("<p>Hello! <span class=\"sidenote\">and (nested??) also...</span> aside.</p>")
+	expect(out).toEqual("<p>Hello!<label class=\"margin-toggle sidenote-number\"></label><span class=\"sidenote\">and (nested??) also...</span> aside.</p>")
 });
 
 
