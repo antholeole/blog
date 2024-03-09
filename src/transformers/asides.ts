@@ -4,13 +4,14 @@ import type { Text } from 'mdast'
 import { visit } from 'unist-util-visit'
 
 
-const parenRegexp = /\([^\)]+\)/
 export const remarkAside: Plugin<any> = () => {
     return (tree: Node) => {
         visit(tree, 'paragraph', (paragraphNode: Parent) => {
+            const modifiedChildren = []
             for (let child of paragraphNode.children) {
                 if (child.type !== 'text') {
-                    return
+                    modifiedChildren.push(child)
+                    continue
                 }
 
                 const text = child as Text
@@ -29,7 +30,9 @@ export const remarkAside: Plugin<any> = () => {
                         // 2. we should push the previous text as a text span.
                         if (parenDepth === 1) {
                             // remove the space
-                            currentSpan = currentSpan.slice(0, -1)
+                            if (currentSpan.at(-1) === " ") {
+                                currentSpan = currentSpan.slice(0, -1)
+                            }
 
                             textParts.push({
                                 type: "text",
@@ -78,11 +81,10 @@ export const remarkAside: Plugin<any> = () => {
 
                 textParts.push({ type: "text", value: currentSpan })
 
-                // if it DOES equal one, we don't want to touch it.
-                if (textParts.length !== 1) {
-                    paragraphNode.children = textParts as any
-                }
+                modifiedChildren.push(textParts)
             }
+
+            paragraphNode.children = modifiedChildren.flat()
         })
     }
 };

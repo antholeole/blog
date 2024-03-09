@@ -176,7 +176,6 @@ blockquote footer {
 section>footer,
 section>p,
 section>table,
-section>code,
 section>.astro-code {
     width: 55%
 }
@@ -362,7 +361,6 @@ h3>code {
 
 pre>code {
     font-size: .9rem;
-    width: 52.5%;
     margin-left: 2.5%;
     overflow-x: auto;
     display: block
@@ -420,7 +418,8 @@ label.margin-toggle:not(.sidenote-number) {
     hr,
     section>footer,
     section>p,
-    section>table {
+    section>table,
+    section>.astro-code {
         width: 100%
     }
 
