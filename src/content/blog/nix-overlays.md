@@ -1,5 +1,5 @@
 ---
-title: "A How To: Nix Overlays"
+title: "How To: Nix Overlays"
 description: Nix Overlays are very useful tools.
 pubDate: Mar 08 2024
 ---
