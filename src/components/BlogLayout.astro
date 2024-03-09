@@ -1,0 +1,23 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import FormattedDate from '../components/FormattedDate.astro';
+import Layout from './Layout.astro';
+
+type Props = CollectionEntry<'blog'>['data']
+
+const { pubDate, title } = Astro.props;
+---
+<style>
+	.newthought {
+		font-size: 1em;
+		margin-bottom: 2px;
+		display: block;
+	}
+</style>
+<Layout title={title}>
+		<span class="newthought" slot="subheader"><FormattedDate date={pubDate}/></span>
+		<span class="newthought" slot="subheader">Anthony Oleinik</span>
+		<hr/>
+	<slot />
+</Layout>
+

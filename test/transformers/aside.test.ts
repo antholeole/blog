@@ -1,0 +1,34 @@
+import { assert, expect, test } from 'vitest';
+import { printAstPlugin, testRemarkPlugin } from './remark';
+import { remarkAside } from '../../src/transformers/asides';
+
+
+test('should not do anything with no asides', async () => {
+	const md = `Hello! no aside.`;
+
+	const out = await testRemarkPlugin(md, [remarkAside])
+
+	expect(out).toEqual("<p>Hello! no aside.</p>")
+});
+
+
+test('should process a paren as an aside', async () => {
+	const md = `Hello! (and also...) aside.`;
+
+	const out = await testRemarkPlugin(md, [remarkAside])
+
+	expect(out).toEqual("<p>Hello!<label class=\"margin-toggle sidenote-number\"></label><span class=\"sidenote\">and also...</span> aside.</p>")
+});
+
+
+test('should not double process parents', async () => {
+	const md = `Hello! (and (nested??) also...) aside.`;
+
+	const out = await testRemarkPlugin(md, [remarkAside])
+
+	expect(out).toEqual("<p>Hello!<label class=\"margin-toggle sidenote-number\"></label><span class=\"sidenote\">and (nested??) also...</span> aside.</p>")
+});
+
+
+
+
