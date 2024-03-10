@@ -6,6 +6,7 @@ import { visit } from 'unist-util-visit'
 
 export const remarkAside: Plugin<any> = () => {
     return (tree: Node) => {
+        let sidenoteNum = 1
         visit(tree, 'paragraph', (paragraphNode: Parent) => {
             const modifiedChildren = []
             for (let child of paragraphNode.children) {
@@ -45,12 +46,27 @@ export const remarkAside: Plugin<any> = () => {
                                 data: {
                                     hName: "label",
                                     hProperties: {
-                                        className: ["margin-toggle", "sidenote-number"]
+                                        className: ["margin-toggle", "sidenote-number"],
+                                        for: `sn-${sidenoteNum}`
                                     }
                                 }
                             })
 
+                            // add the toggle
+                            textParts.push({
+                                type: "element",
+                                data: {
+                                    hName: "input",
+                                    hProperties: {
+                                        className: ["margin-toggle"],
+                                        for: `sn-${sidenoteNum}`,
+                                        type: "checkbox",
+                                        id: `sn-${sidenoteNum}`
+                                    }
+                                }
+                            })
 
+                            sidenoteNum++
                             currentSpan = ""
                         } else {
                             currentSpan += char

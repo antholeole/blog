@@ -18,7 +18,6 @@ export const remarkNewthought: Plugin<any> = () => {
                 const text = child as Text
 
                 const out = parseTextWithBars(text.value)
-                console.log(out)
 
                 // if it DOES equal one, we don't want to touch it.
                 if (out.length !== 1) {

@@ -14,7 +14,7 @@ export default defineConfig({
 		shikiConfig: {
 			theme: 'solarized-light',
 			langs: [],
-			wrap: true,
+			wrap: false,
 		},
 	},
 });
