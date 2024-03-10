@@ -58,7 +58,7 @@ But how do we actually _get_ a `pkgs`? In the flake land, you specify it as inpu
 
 You can even select a `nixpkgs` from a specific commit to get an exact version of a package that you want - for example, say you want golang 1.20.4: 
 
-1. Go to `nixhub.io/packages/go`
+1. Go to [nixhub.io/packages/go](nixhub.io/packages/go)
 2. Search find the correct package set revision for go 1.20.3
 3. Use it as in input to your flake!
 
