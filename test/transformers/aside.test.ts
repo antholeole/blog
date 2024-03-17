@@ -26,7 +26,7 @@ test('should not double process parents', async () => {
 
 	const out = await testRemarkPlugin(md, [remarkAside])
 
-	expect(out).toEqual("<p>Hello!<label class=\"margin-toggle sidenote-number\"></label><span class=\"sidenote\">and (nested??) also...</span> aside.</p>")
+	expect(out).toEqual('<p>Hello!<label class="margin-toggle sidenote-number" for="sn-1"></label><input class="margin-toggle" for="sn-1" type="checkbox" id="sn-1"><span class="sidenote">and (nested??) also...</span> aside.</p>')
 });
 
 test('subsequent parens should work', async () => {
@@ -34,19 +34,15 @@ test('subsequent parens should work', async () => {
 
 	const out = await testRemarkPlugin(md, [remarkAside])
 
-	expect(out).toEqual("<p>Hello!<label class=\"margin-toggle sidenote-number\"></label><span class=\"sidenote\">first paren</span> aside and<label class=\"margin-toggle sidenote-number\"></label><span class=\"sidenote\">second paren!</span> here.</p>")
+	expect(out).toEqual('<p>Hello!<label class="margin-toggle sidenote-number" for="sn-1"></label><input class="margin-toggle" for="sn-1" type="checkbox" id="sn-1"><span class="sidenote">first paren</span> aside and<label class="margin-toggle sidenote-number" for="sn-2"></label><input class="margin-toggle" for="sn-2" type="checkbox" id="sn-2"><span class="sidenote">second paren!</span> here.</p>')
 });
 
 test("should allow other things", async () => {
-	const md = `
-	This is P1!
+	const md = "hi _hi_ (hi)"
 
-	Sometimes, packages in nix will have inputs that we can override; For example, \`ripgrep\` allows us to specify an input \`withPCRE2\` (I have no idea what that input does but its just a boolean so it makes for a good example).
-	`
-	
 	const out = await testRemarkPlugin(md, [printAstPlugin, remarkAside])
 
-	expect(out).toEqual('<p>Sometimes, packages in nix will have inputs that we can override; For example, <code>ripgrep</code> allows us to specify an input <code>withPCRE2</code><label class="margin-toggle sidenote-number"></label><span class="sidenote">I have no idea what that input does but its just a boolean so it makesfor a good example</span>.</p>')
+	expect(out).toEqual('<p>hi <em>hi</em><label class="margin-toggle sidenote-number" for="sn-1"></label><input class="margin-toggle" for="sn-1" type="checkbox" id="sn-1"><span class="sidenote">hi</span></p>')
 })
 
 
