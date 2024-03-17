@@ -1,12 +1,10 @@
 ---
-title: "Patching Software Using Nix"
+title: "Patching Software Using Nix (For Laymen)"
 description: A laymen tutorial.
 pubDate: Mar 17 2024
 ---
 
-# Patching Software Using Nix (For Laymen)
-
-Patching software (a quick rundown on patching, since it has become apparent that it is not in every dev's toolbox: code is just text files. There exists a file format that is a diff between real code and desired code; for instance, maybe you want to add a feature or change some functionality. You can make your edits and generate a patch file and then apply it to the source to get a version with your changes.) is incredibly powerful. Instead of having to maintain a fork, or figure out how to distribute your version of the patched software, you can just keep a `.patch` file alongside your nix code and apply it at build time. 
+Patching software (a quick rundown on patching, since it has become apparent that it is not in every dev's toolbox: code is just text files. There exists a file format that is a diff between real code and desired code; for instance, maybe you want to add a feature or change some functionality. You can make your edits and generate a patch file and then apply it to the source to get a version with your changes.) is incredibly powerful. Instead of having to maintain a fork, or figure out how to distribute your version of the patched software, you can keep a `.patch` file alongside your nix code and apply it at build time. 
 
 Nix makes it easy to apply patches to code in the `nixpkgs` set, but like many things in nix, the functionality is kind of buried behind a lack of documentation - you can do it, it is not difficult, but figuring out how is non-trivial. 
 
