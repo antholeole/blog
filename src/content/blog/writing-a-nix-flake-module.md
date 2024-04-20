@@ -6,7 +6,7 @@ pubDate: Apr 04 2024
 
 Look at the [following documentation page](https://nix-community.github.io/home-manager/options.xhtml). It is beautiful. Hundreds of options all well-documented and explained, with examples, defaults, and source code locations. 
 
-This is the beauty of the nix module system. Projects define how to create or consume a nix module; for instance, the wonderful [nix-index-database](https://github.com/nix-community/nix-index-database/blob/93aed67288be60c9ef6133ba2f8de128f4ef265c/flake.nix#L42-L45) defines a `home-manager` module. We can plug it into our [dotfiles](https://github.com/antholeole/nixconfig/blob/fcbe37f177435fb8817ed6b71190dd8e0e12f25b/hmModules/anthony.nix#L13) and [use it](https://github.com/antholeole/nixconfig/blob/main/hmModules/nix-index.nix)! 
+This is the beauty of the nix module system. Projects define a module system; then, anyone can write a module for that system and plug right in - first or third party. It's a recipe for large-scale and maintainable systems. For instance, the wonderful [nix-index-database](https://github.com/nix-community/nix-index-database/blob/93aed67288be60c9ef6133ba2f8de128f4ef265c/flake.nix#L42-L45) defines a `home-manager` module. We can plug it into our [dotfiles](https://github.com/antholeole/nixconfig/blob/fcbe37f177435fb8817ed6b71190dd8e0e12f25b/hmModules/anthony.nix#L13) and [use it](https://github.com/antholeole/nixconfig/blob/main/hmModules/nix-index.nix)! 
 
 Projects often define their own module system, like we just saw with `home-manager`. Another popular project that allows us to define modules is [flake parts](https://flake.parts/), a library that splits your flake up into multiple, smaller parts - and gives you more control into the components that you "plug in" to your `flake.nix`. 
 
@@ -14,7 +14,7 @@ Projects often define their own module system, like we just saw with `home-manag
 
 A module plugs into a module system to expose a new set of features. In the following example, we'll use the `treefmt-nix` module and plug it into a `flake-parts` module system to expose some formatting features.
 
-Perhaps I have a big project that's written in `terraform` - `tffmt` works for me for the most part, but now I want to lint my markdown files as well. I could stuff my `flake.nix` with `tree-fmt`:
+Perhaps I have a big project that's written in `terraform` - `terraform format` works for me for the most part, but now I want to lint my markdown files as well. I could stuff my `flake.nix` with `tree-fmt`:
 
 ```nix
 {
@@ -172,7 +172,7 @@ Lets define our options. First, we want to be nice to our nighbors and tuck away
 }
 ```
 
-what does _that_ say? We defined a sub-module called `string-repeater`. the type of the submodule is... well, a submodule! we pass in `system` and `pkgs` into that submodule. Either we define some primative, or a submodule. Any "nested attribute" is a submodule. That submodule needs its own `options` section, too.
+what does _that_ say? We defined a sub-module called `string-repeater`. the type of the submodule is... well, a submodule! Either we define some primative, or a submodule: any "nested attribute" is a submodule. We do this becuase we want to logically group together options; you may go as deep as you'd like with submodules; `my.sub.module.that.you.plug.in.enable = true` is perfectly valid, given you define submodule types all the way down. It's polite to namespace options; if we just had a top-level `repeat` option, that would be very rude. Instead, we want to define `string-repeater.repeat`.
 
 Lets first add the `repeat` and `times` part that we talked about:
 
@@ -300,7 +300,9 @@ Now lets use that `config` block that we talked about:
 }
 ```
 
-That's our module, all complete! Now, the user can configure `string-repeater` and access the output package as `config.string-repeater.package`. 
+That's our module, all complete! Now, the user can configure `string-repeater` and access the output package as `config.string-repeater.package`. Infact, the user can access _any_ configuration they made; this means that you can access, for example, `treefmt-nix` configurations if you'd like; perhaps you want to write a module that adds additional functionality? in this case we grab our `config` option from this module - see how it's an input to the submodule? But we can use a higher-level config object if we wanted. We'd just have to refer to e.g. `config.string-repeater.times` instead of `config.times`. (It's also rude to assume that the consumer of your flake has some input, so you should throw a useful error if you want the user to install some input that does not yet exist.)
+
+### Using Our Own Module
 
 Here's a flake that _consumes_ that package (It just imports the module like a path instead of going through the flake):
 
@@ -343,6 +345,6 @@ hello world!
 hello world!
 ```
  
-It worked! We wrote a nix module! Publishing is out of scope, but I've seen people use a github action to publish a to flakehub. Otherwise, if you push to github, you can use your module in the `inputs` section, similar to how we're importing `flake-parts` above.
+It worked! We wrote a nix module! Publishing is out of scope, but I've seen people use a github action to publish to flakehub. Otherwise, if you push to github, you can use your module in the `inputs` section, similar to how we're importing `flake-parts` above.
 
 I'd suggest [flakehub](flakehub.com), because you get a nice documentation page, but github is easier - especially for your first flake.
