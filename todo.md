@@ -1,0 +1,3 @@
+- System Understandability
+- Lets Just Little Big Planet this shit
+- Variables names should not expire
