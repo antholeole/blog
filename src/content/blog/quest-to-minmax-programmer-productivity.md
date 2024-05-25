@@ -38,6 +38,8 @@ I haven't even begun to explain what I did to my terminal: it is probably closer
 
 ## Was it all worth it? 
 
+First of all: this post does not scratch the surface. I have 353 commits in my dotfiles, most of them adding some totally new category of goodies. 
+
 I still have a very long career ahead of me. One thing that has always stuck out to me in economics class is that if you intend to invest in skills, it is best to do it early in your career so it has a longer runway to pay out. I refuse to count the hours I spent tinkering with window managers, or setting up aliases I ended up never using. I like to think it was a learning process - this journey took me all the way from learning nix to learning how to use a multimeter - but has also costed me a non-negligible amount. I'll report back to this blog post in 20 years (or tell my Rabbit R1 to do it for me) and update it with if I think this was a good investment of my time or not. 
 
 Did I have fun? absolutely.
