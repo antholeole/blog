@@ -14,7 +14,7 @@ I'll attempt to bridge the gap here and show how patching software using nix is 
 
 The first step is to find the software you want to patch. For our case, lets patch a VSCode extension (This is what I was doing that inspired me to write this article.). You can patch any derivation, not just ones in the nix package set.
 
-The vscode extension in question is going to be the [picat extension](https://github.com/arthwang/vsc-picat); the extension hasn't been touched in 7 years but still does _roughly_ what is asked of it. In this case, I just want to add a quick `console.log()`. A special note here: This file is not in the nix package set! We get it from [nix-vscode-extensions](https://github.com/nix-community/nix-vscode-extensions), a helper flake that puts the entirety of openvsx and the vsc marketplace into nix derivations.
+The vscode extension in question is going to be the [Picat extension](https://github.com/arthwang/vsc-picat); the extension hasn't been touched in 7 years but still does _roughly_ what is asked of it. In this case, I just want to add a quick `console.log()`. A special note here: This file is not in the nix package set! We get it from [nix-vscode-extensions](https://github.com/nix-community/nix-vscode-extensions), a helper flake that puts the entirety of openvsx and the vsc marketplace into nix derivations.
 
 ## Isolating the derivation
 
@@ -67,7 +67,7 @@ Some other stuff came with the archive, but we actually want to edit the extensi
 
 cd into the source root (`cd extension`) run the following command: `patchPhase`. This will apply the patches that the original package has asked to apply. In this case, it does nothing - but it's always prudent to check and avoid headaches later down the line.
 
-We can now make our patch! The easiest way to do this is to initalize a git repo. In the source root: `git init . && git add --all && git commit -m "init"`. Now we can make our changes in the code.
+We can now make our patch! The easiest way to do this is to initialize a git repo. In the source root: `git init . && git add --all && git commit -m "init"`. Now we can make our changes in the code.
 
 Go ahead and make your changes to the source code; I'll wait here until you're done. For me, I'll be adding my `console.log`. 
 
@@ -97,7 +97,7 @@ Now we get to apply the patch. All derivations come with the `.overrideAttrs` at
 
 ```
 
-Remember how we said we want to apply the default patches first? that's where the `o.patches or []` comes from. We're telling nix that we want to create a list that either has the patches specified or an empty list, and then appending our own patches. If you're initalized this as a git repo, remember to `git add mypatch.patch` - otherwise nix will say it can't find that file.
+Remember how we said we want to apply the default patches first? that's where the `o.patches or []` comes from. We're telling nix that we want to create a list that either has the patches specified or an empty list, and then appending our own patches. If you're initialize this as a git repo, remember to `git add mypatch.patch` - otherwise nix will say it can't find that file.
 
 ## Running and verifying
 

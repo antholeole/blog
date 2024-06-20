@@ -4,7 +4,7 @@ description: Kinks in the Armor
 pubDate: June 19, 2024
 ---
 
-I have the pleasure of using Scala at $DAYJOB; I believe I landed on the only team at Google that uses Scala, for better or for worse (the "worse" part is without a doubt the poor integration with the broader Google infrastructure - a story for another day). 
+I have the pleasure of using Scala at $DAYJOB; I believe I landed on the only team at Google that uses Scala, which turns out to be a lot of fun a lot of the time, but that's a story for another day.
 
 I love writing in Scala. The niceties are great and the code is scalable - but that is not without minor problems. 
 
@@ -12,7 +12,7 @@ I love writing in Scala. The niceties are great and the code is scalable - but t
 
 I'm starting off with a weak point, since this has been fixed in Scala 3 - which I do not get to use, so I'll keep this point here - but hats off to the Scala team for fixing this.
 
-In mathematical terms, a a function is some mapping from a domain x onto a range y; when you define a function in programming languages, you are mapping the domain of the inputs onto the range of whatever type you are returning (If you happen to be a mathamatician, please don't judge my poor-man's description of functions.). A partial function is a mapping of a _partial_ domain onto a range: the classic example is a `divide` function, where any input is mapped besides when the denominator is equal to zero. 
+In mathematical terms, a a function is some mapping from a domain x onto a range y; when you define a function in programming languages, you are mapping the domain of the inputs onto the range of whatever type you are returning (If you happen to be a mathematician, please don't judge my poor-man's description of functions.). A partial function is a mapping of a _partial_ domain onto a range: the classic example is a `divide` function, where any input is mapped besides when the denominator is equal to zero. 
 
 In Scala, it sometimes is easier to express a function in terms of a partial function. One example is `collect` on an iterator, which is essentially a `map` combined with a `filter`:
 
@@ -90,7 +90,7 @@ Oh! what happened there? The case that didn't match "bye", threw an exception. T
 
 If you think about it, this actually makes sense: in this example, we're discarding the output of the partial function, but in other examples, you may want to actually use the output of the partial function - and what if you don't get a match? There are sane ways to solve this problem at a language level, but they all involve some sort of opinion. For example, if you have the function return an option, every single partial function call will need some sort of option deconstruction afterwords (this is what the `.lift` operator on partial functions does).
 
-Scala gives you tools to solve it yourself. For example, we have `applyOrElse`, which is the most efficent way to handle this scenario.
+Scala gives you tools to solve it yourself. For example, we have `applyOrElse`, which is the most efficient way to handle this scenario.
 
 Because this is a hard problem to solve at a language level, best-case scenario here for me would be to enable a linter to say "this evaluation of a partial function is unsafe, you should try to perform a safe operation to map it onto a total range" or something of the sort.
 
@@ -149,7 +149,7 @@ case class Human(name: String)
 case class EmployedHuman(name: String, job: String) extends Human(name)
 ```
 
-Oops! this doesn't work. Scala has an error message about case-to-case inheritance being not legal with some workaround. I typically am able to make the base class non-case and abstract, with solves the limitation but fundementally models a different hierarchy (one that tends to be better than the original that I had planned, most of the time!).
+Oops! this doesn't work. Scala has an error message about case-to-case inheritance being not legal with some workaround. I typically am able to make the base class non-case and abstract, with solves the limitation but fundamentally models a different hierarchy (one that tends to be better than the original that I had planned, most of the time!).
 
 ```scala
 abstract class Human(name: String)
@@ -158,11 +158,11 @@ case class EmployedHuman(name: String, job: String) extends Human(name)
 
 But what about the suggestion that the Scala compiler gives us? It says: "to overcome this limitation use extractors to pattern match on non-leaf nodes." I'm not really sure what that means, and it seems most of the internet just makes some base class non-case, just as I had above. 
 
-Again, this is probably cooked up by someone smarter than me who had a very good reason to prevent such a model. Likely, allowing case-to-case opens up a can of worms larger than just a minor inconvienence, but I haven't been able to think through the proof-by-contradiction to get to the same conclusion.
+Again, this is probably cooked up by someone smarter than me who had a very good reason to prevent such a model. Likely, allowing case-to-case opens up a can of worms larger than just a minor inconvenience, but I haven't been able to think through the proof-by-contradiction to get to the same conclusion.
 
 ## Fin
 
-Scala is fantastic. Most of the complaints here are incredibly minor: they have sensible work-arounds, and are small hiccups in what is an expressive programming model. 
+Scala is fantastic. Most of the complaints here are incredibly minor: they have sensible workarounds, and are small hiccups in what is an expressive programming model. 
 
 Would I use Scala for a new project? Obviously it depends on the problem, but I do think it is my favorite of the JVM languages. I'm not a garbage collector hater, but it does come with tradeoffs that you must consider prior to making a decision like this.
 

@@ -102,7 +102,7 @@ Lets write a package that takes a string and a number, and then outputs it to st
 }
 ```
 
-and then when we execute the binary for our derivation, we echo `<some stringsome stringsomestring>` to stdout! Very useful, I know.
+and then when we execute the binary for our derivation, we echo `<some stringsome stringsome string>` to stdout! Very useful, I know.
 
 lets start by writing that flake we mentioned earlier:
 
@@ -148,9 +148,9 @@ lets create that `./module.nix` file now.
 }
 ```
 
-`flake-parts` exposes a nice `flake-parts-lib` library with useful features like `mkPerSystemOption`. If you're unfamilar with flake parts, `per-system` is the way that `flake-parts` nicely abstracts around having to sepecify `system` everywhere. It automatically applies the `system` parameter to these options, meaning any system we define in `flake.nix` is useable.
+`flake-parts` exposes a nice `flake-parts-lib` library with useful features like `mkPerSystemOption`. If you're unfamiliar with flake parts, `per-system` is the way that `flake-parts` nicely abstracts around having to specify `system` everywhere. It automatically applies the `system` parameter to these options, meaning any system we define in `flake.nix` is useable.
 
-Lets define our options. First, we want to be nice to our nighbors and tuck away this option set into a nested one; that way the user isn't setting `repeat = 3` on the gobal scope, which means literally nothing to most readers; we want them to have to set `string-repeater.repeat = 3`. 
+Lets define our options. First, we want to be nice to our neighbors and tuck away this option set into a nested one; that way the user isn't setting `repeat = 3` on the global scope, which means literally nothing to most readers; we want them to have to set `string-repeater.repeat = 3`. 
 
 ```nix
 { lib, flake-parts-lib, ... }: {
@@ -172,7 +172,7 @@ Lets define our options. First, we want to be nice to our nighbors and tuck away
 }
 ```
 
-what does _that_ say? We defined a sub-module called `string-repeater`. the type of the submodule is... well, a submodule! Either we define some primative, or a submodule: any "nested attribute" is a submodule. We do this becuase we want to logically group together options; you may go as deep as you'd like with submodules; `my.sub.module.that.you.plug.in.enable = true` is perfectly valid, given you define submodule types all the way down. It's polite to namespace options; if we just had a top-level `repeat` option, that would be very rude. Instead, we want to define `string-repeater.repeat`.
+what does _that_ say? We defined a sub-module called `string-repeater`. the type of the submodule is... well, a submodule! Either we define some primitive, or a submodule: any "nested attribute" is a submodule. We do this because we want to logically group together options; you may go as deep as you'd like with submodules; `my.sub.module.that.you.plug.in.enable = true` is perfectly valid, given you define submodule types all the way down. It's polite to namespace options; if we just had a top-level `repeat` option, that would be very rude. Instead, we want to define `string-repeater.repeat`.
 
 Lets first add the `repeat` and `times` part that we talked about:
 
@@ -300,7 +300,7 @@ Now lets use that `config` block that we talked about:
 }
 ```
 
-That's our module, all complete! Now, the user can configure `string-repeater` and access the output package as `config.string-repeater.package`. Infact, the user can access _any_ configuration they made; this means that you can access, for example, `treefmt-nix` configurations if you'd like; perhaps you want to write a module that adds additional functionality? in this case we grab our `config` option from this module - see how it's an input to the submodule? But we can use a higher-level config object if we wanted. We'd just have to refer to e.g. `config.string-repeater.times` instead of `config.times`. (It's also rude to assume that the consumer of your flake has some input, so you should throw a useful error if you want the user to install some input that does not yet exist.)
+That's our module, all complete! Now, the user can configure `string-repeater` and access the output package as `config.string-repeater.package`. In fact, the user can access _any_ configuration they made; this means that you can access, for example, `treefmt-nix` configurations if you'd like; perhaps you want to write a module that adds additional functionality? in this case we grab our `config` option from this module - see how it's an input to the submodule? But we can use a higher-level config object if we wanted. We'd just have to refer to e.g. `config.string-repeater.times` instead of `config.times`. (It's also rude to assume that the consumer of your flake has some input, so you should throw a useful error if you want the user to install some input that does not yet exist.)
 
 ### Using Our Own Module
 
