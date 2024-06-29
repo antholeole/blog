@@ -4,11 +4,9 @@ description: A relatively simple problem that is quite difficult in reality
 pubDate: June 28, 2024
 ---
 
-TL;DR: [Here's a gist for a BUILD.bazel that runs jest tests in a container or as a bazel test target](https://gist.github.com/antholeole/8c7e9744394ddde12325a5b5b2783fee).
-
 Often, I run into a task that I scope prior to starting at around about N hours of work that end up taking roughly N days, or an unit-order of magnitude more than I intended. Often, a task holds some edge case or constraint that I did not take into account for: perhaps there are additional components I didn't scope in, or some constraints make it much more difficult. 
 
-The task at hand? Build a container that runs [jest](https://jestjs.io/) tests. If I were to be using a Dockerfile, this is essentially what we are trying to reconstruct in bazel:
+The task at hand? Build a container that runs [jest](https://jestjs.io/) tests; that is, the final container should do something like, in the painful irreproducibility that is Dockerfiles:
 
 ```Dockerfile
 FROM node:18-alpine
@@ -26,7 +24,7 @@ RUN npm ci --production
 CMD ["npm", "test"] 
 ```
 
-Not too hard in the land of ticking time bombs! 
+Not too hard in the land of ticking timebombs! 
 
 ## The Why
 
@@ -42,19 +40,19 @@ The `bazel` (which I confess I have spent far less time on as a language than ni
 
 No.
 
-First, `bazel` is "less complex" than nix in the sense that the end user API to a bunch of the `-rules` packages are quite optimized for their use cases. But once you begin to exit the beaten path, you end up contorting the API very hard to try to fit their square peg into your round hole.
+First, `bazel` is "less complex" than nix in the sense that the end user API to a bunch of the `-rules` packages are quite optimized for their usecases. But once you begin to exit the beaten path, you end up contorting the API very hard to try to fit their square peg into your round hole.
 
 The constraints of this are as follows:
 
-- I want to be able to run the tests in three separate ways: Locally, using `bazel test`, so I am able to iterate on the tests without having to re-build a container every time I make a change to the tests. Locally in a container, so I can test the build in a container, as well as the table stakes of running inside a container in cloud deploy.
+- I want to be able to run the tests in three seperate ways: Locally, using `bazel test`, so I am able to iterate on the tests without having to re-build a container every time I make a change to the tests. Locally in a container, so I can test the build in a container, as well as the tablestakes of running inside a container in cloud deploy.
 - It would be useful if I was able to provide `jest` flags to run locally, so I don't have to run the entire test suite if I make a single test change.
-- The tests should be parameterized to be able to run in different environments. (This turned out to be a bit more of a jest problem than a Bazel one, but it was a source of complexity nonetheless.)
+- The tests should be parameterized to be able to run in different environments. (This turned out to be a bit more of a jest problem than a bazel one, but it was a source of complexity nontheless.)
 
 One source of complexity here is that [`rules_js`](https://docs.aspect.build/rulesets/aspect_rules_js/docs/) has taken the stance that they will only support `pnpm` as a package manager. That is all well and good, but `pnpm` symlinks transitive dependencies, which makes things like executing `node ./npm_packages/.bin/jest` a major pain, since `node` will not resolve the transitive dependencies that way.
 
 ## What Did the Solution Look Like?
 
-I'll spare the battle that I had with the Bazel rules, but it suffices to say it was quite the epic (/s) story: at one point I had written my own Bazel rule that ran `npm install`, completely circumnavigating `rules_js`. After a moment of sobering thought, I realized the complexity of such a monster that I had created was far too high to let live, and I continued to try to find a more optimal solution.
+I'll spare the battle that I had with the Bazel rules, but it suffices to say it was quite the epic (/s) story: at one point I had written my own bazel rule that ran `npm install`, completely circumnavigating `rules_js`. After a moment of sobering thought, I realized the complexity of such a monster that I had created was far too high to let live, and I contined to try to find a more optimal solution.
 
 let's start off with the easiest bit: a quick dump of the `MODULE.bazel`:
 
@@ -84,7 +82,7 @@ bazel_dep(name = "aspect_rules_jest", version = "0.22.0-rc0")
 
 Some quick N.B.'s here:
 - You are able to generate a `pnpm-lock.yaml` from a `npm-lock.json`, but I chose not to, because having two package managers is confusing; regardless, all dependencies need to be added to the `pnpm` anyway, so I chose to use that over `npm` entirely.
-- You'll note that the generated `npm` packages repo is called `integration_npm`; I wanted to leave the door open in the future to creating new node-based subtracts, so I decided to "scope" the name of the packages so that not many changes have to be made in the future if more gets added here.
+- You'll note that the generated `npm` packages repo is called `integration_npm`; I wanted to leave the door open in the future to creating new node-based subprojects, so I decided to "scope" the name of the packages so that not many changes have to be made in the future if more gets added here.
 
 You'll also note that the is Typescipt hidden amongst the weeds! That's where we'll start our `BUILD.bazel`.
 
@@ -95,6 +93,7 @@ load("@integration_npm//:defs.bzl", "npm_link_all_packages")
 load("@aspect_rules_js//js:defs.bzl", "js_binary", "js_image_layer")
 load("@rules_oci//oci:defs.bzl", "oci_image")
 load("@aspect_rules_jest//jest:defs.bzl", "jest_test")
+load("//bazel:image_push.bzl", "rtdb_registry_push")
 load("@aspect_bazel_lib//lib:copy_file.bzl", "copy_file")
 
 npm_link_all_packages(name = "node_modules")
@@ -106,11 +105,11 @@ ts_project(
 )
 ```
 
-This rule takes all of the typescript sources in the `src` folder and converts it to a JavaScript source. That is, if I had a file called `src/some.test.ts`, referring to `:integration_test_js/src/some.test.js` would work. 
+This rule takes all of the typescript sources in the `src` folder and converts it to a javasscript source. That is, if I had a file called `src/some.test.ts`, refering to `:integration_test_js/src/some.test.js` would work. 
 
 Next, lets sidestep running this _outside_ the container and instead focus on running inside the container.
 
-the `js_binary` rule from `rules_js` essentially runs `node <your path>` on a script. This is useful if you're writing some app in JS, since typically you have some `main.js` where you start your server, but this isn't the case for us; instead, we want to run `node_modules/.bin/jest`. We could point `js_binary` to that path, but I know that this leads to a lot of pain, since dependency resolution is all gobbledygook from inside the `node_modules` folder.
+the `js_binary` rule from `rules_js` essentially runs `node <your path>` on a script. This is useful if you're writing some app in JS, since typically you have some `main.js` where you start your server, but this isn't the case for us; instead, we want to run `node_modules/.bin/jest`. We could point `js_binary` to that path, but I know that this leads to a lot of pain, since dependency resolution is all gobblygook from inside the `node_modules` folder.
 
 Instead, lets do what `js_binary` intended and run a script that can live _outside_ `node_modules`:
 
@@ -121,7 +120,7 @@ const path = require("path");
 jest.runCLI({}, [path.resolve(__dirname, '.')]);
 ```
 
-Very simple script that I will dub `driver.js`: it runs jest from its non-public library API; [there seems to be some level of push to expose a _real_ public API](https://github.com/jestjs/jest/issues/5048), but there also seems a lack of steam behind the proposal, so we do what we must. Here is that binary rule all in place:
+Very simple script that I will dub `driver.js`: it runs jest from its non-public library API; [there seems to be some level of push to expose a _real_ public API](https://github.com/jestjs/jest/issues/5048), but there also seems a lack of steam begind the proposal, so we do what we must. Here is that binary rule all in place:
 
 ```bazel
 # bazel run this will NOT work; bazel does not 
@@ -172,7 +171,7 @@ oci_image(
 )
 ```
 
-This image won't work quite yet, though: we haven't told jest where the config file for it can be found. We want that config file to be slightly magical; it's going to hold our per-env configuration. Jest has the ability to setup global constants; we want to use that to our advantage so that we can easily refer to our configuration. Our tests, in the end, will look like this:
+This image won't work quite yet, though: we haven't told jest where the config file for it can be found. We want that config file to be slightly magical; it's going to hold our per-env configuration. Jest has the ability to setup global contants; we want to use that to our advantage so that we can easily refer to our configuration. Our tests, in the end, will look like this:
 
 ```typescript
 // So clean!
@@ -197,7 +196,7 @@ declare global {
 }
 ```
 
-the `tsconfig.json` will use that automatically, but Bazel needs to be told that any TS that refers to that is valid:
+the `tsconfig.json` will use that automatically, but bazel needs to be told that any TS that refers to that is valid:
 
 ```bazel
 # amend the prevous ts_project
@@ -281,12 +280,4 @@ jest_test(
 )
 ```
 
-And that's that! We've now assembled a container that runs a `jest` test suite for us. 
-
-We can do the following: 
-- `bazel test //integration_tests:tests -- some-jest-flags`, which will run the jest tests.
-- `bazel build //integration_tests:integration_test_image`, which will build us a image with the local configs in place.
-- `bazel build //integration_tests:integration_test_image --//integration_tests:environment=staging`, which will build a container that has the staging environment configurations in place.
-
-
-[Again, here's that final gist](https://gist.github.com/antholeole/8c7e9744394ddde12325a5b5b2783fee).
+And thats that! We've now assembled a container that runs a `jest` test suite for us. 
