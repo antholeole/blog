@@ -42,13 +42,13 @@ The `bazel` (which I confess I have spent far less time on as a language than ni
 
 No.
 
-First, `bazel` is "less complex" than nix in the sense that the end user API to a bunch of the `-rules` packages are quite optimized for their use cases. But once you begin to exit the beaten path, you end up contorting the API very hard to try to fit their square peg into your round hole.
+First, `bazel` is "less complex" than nix in the sense that the end user API to a bunch of the `-rules` packages are well-optimized for their use cases. Once you begin to stray off the beaten path, you end up contorting the API very hard to try to fit their square peg into your round hole.
 
 The constraints of this are as follows:
 
 - I want to be able to run the tests in three separate ways: Locally, using `bazel test`, so I am able to iterate on the tests without having to re-build a container every time I make a change to the tests. Locally in a container, so I can test the build in a container, as well as the table stakes of running inside a container in cloud deploy.
 - It would be useful if I was able to provide `jest` flags to run locally, so I don't have to run the entire test suite if I make a single test change.
-- The tests should be parameterized to be able to run in different environments. (This turned out to be a bit more of a jest problem than a Bazel one, but it was a source of complexity nonetheless.)
+- The tests should be parameterized to be able to run in different environments. This turned out to be a bit more of a jest problem than a Bazel one, but it was a source of complexity nonetheless.
 
 One source of complexity here is that [`rules_js`](https://docs.aspect.build/rulesets/aspect_rules_js/docs/) has taken the stance that they will only support `pnpm` as a package manager. That is all well and good, but `pnpm` symlinks transitive dependencies, which makes things like executing `node ./npm_packages/.bin/jest` a major pain, since `node` will not resolve the transitive dependencies that way.
 
