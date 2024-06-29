@@ -26,7 +26,7 @@ RUN npm ci --production
 CMD ["npm", "test"] 
 ```
 
-Not too hard in the land of ticking time bombs! 
+While this was trivial with a Dockerfile, reproducing the image over and over again may be difficult. Futher, the docker images must be stored out of band: built with some sort of cli command and pushed elsewhere. If we use Bazel, we can use our build system to re-build the image the same exact way, every time, and well integrated into a single `bazel run <some registry push target>`.
 
 ## The Why
 
