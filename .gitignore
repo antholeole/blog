@@ -21,3 +21,12 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+
+*.bak
+*.o
+a.out
+
+CMakeCache.txt
+cmake_install.cache
+CMakeFiles
+Makefile
