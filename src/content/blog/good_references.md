@@ -9,3 +9,4 @@ Sometimes, I stumble upon some reading material that I wish I had bookmarked for
 In order of finding the material:
 
 1. [DPDK memory concepts](https://www.dpdk.org/memory-in-dpdk-part-1-general-concepts/). Good high level overview of NUMA, TLB, Huge Pages, DMA.
+2. [Graphics Tricks From Boomers](https://arnaud-carre.github.io/2024-10-06-vpternlogd/). Great explanation of SIMD vpternlogd, in a way that makes sense.
