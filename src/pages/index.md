@@ -10,9 +10,6 @@ layout: ../components/Layout.astro
 
 Currently working on distributed systems at Google.
 
-[blog posts](blog_directory)
-
-
 ## Employment History
 ### Google. 2022-Current
 **RTDB - San Francisco**
