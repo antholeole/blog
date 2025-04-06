@@ -15,6 +15,7 @@ Currently working on distributed systems at Google.
 ## Employment History
 ### Google. July 2023-Current
 **RTDB - San Francisco. (L3 July 2023-Oct 2024. L4 Oct 2024-Current.)**
+
 SWE supporting ~30 million concurrents across multiple regions on a team of 6. Our main goal was to reduce the engineer time required for day-to-day maintenance; estimated 14 SWE day/month toil savings.
 
 - Migrated 10+ services to a Kubernetes from a (Linux) VM based architecture, modernizing development workflows practices and operational efficiency. 
