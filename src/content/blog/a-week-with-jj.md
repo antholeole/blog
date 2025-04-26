@@ -4,9 +4,9 @@ description: JJ, a new experimental vcs
 pubDate: July 15, 2024
 ---
 
-I've heard about [jujutsu](https://github.com/martinvonz/jj) months ago. I'm always looking for better tools; I guess you could say I'm a software early adopter. I use a [kakoune](https://kakoune.org/) plugin for VSCode, evangelize [nix](nixos.org), and even use a [3x5+5 keyboard](https://bastardkb.com/product/charybdis-nano-prebuilt-preorder-2/).
+I've heard about [jujutsu](https://github.com/martinvonz/jj) months ago. I've never been _bad_ at git; infact, I've been quite good at getting myself out of git-shaped pickles, and generally know my way around the tool - but I've always been looking for something _more_. Something I don't feel like I have to wrap up with scripts and monkeypatches.
 
-In a recent wave of posts about `jj` (jj, if you weren't sure, is the binary name that jujutsu uses), followed by a sign-from-the-heavens coworker who switched to `jj` for a company hack-week, I decided I had to give it a try. 
+In the recent wave of posts about `jj` (jj, if you weren't sure, is the binary name that jujutsu uses), followed by a sign-from-the-heavens coworker who switched to `jj` for a company hack-week, I ws finally convinced to give it a try. 
 
 Unfortunately, I liked it a lot.
 
@@ -24,7 +24,7 @@ Oops: perhaps I joined the horse beating.
 
 `git` allows you to brute force the branching model. You do not have to understand a rebase to rebase - you will get in hairy, often impossible to salvage situations, but you can be a software engineer without looking at the `git` docs once. I'm not sure if the same can be said about `jj`, since I have not attempted the aforementioned doc skipping, but I'm sure its possible. After spending some time with `jj`, I feel like I truly understand branches. I understood them previously, but not to the degree that `jj` has taught them. Perhaps it is the delightful API: `jj rebase --from <some ref> --to <another ref>` is the most cleanly expressed rebasing I've ever seen. You can smell the lack of decades of legacy decisions, and it smells wonderful.
 
-Speaking of years of legacy decisions: Here's one that `git` can't ever escape. The lack of an `undo` command. `git` requires you to say exactly what you want to undo: unstage, unadd, uncommit, unsomething. This is sensible! but each of those actions require a different subcommand, which gets quite difficult to track. Even the [git docs](https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things) seem to have a hard time explaining the flow-chart of undo. The `jj undo` command is very good, in part because `jj` tracks all operations sequentially. `jj operations list` is just _fun to look at_. I can see my entire day in a `jj operations list`: what I worked on from clock in to clock out. It is excellent; and to be able to undo a accidental branch 
+Speaking of years of legacy decisions: Here's one that `git` can't ever escape. The lack of an `undo` command. `git` requires you to say exactly what you want to undo: unstage, unadd, uncommit, unsomething. This is sensible! but each of those actions require a different subcommand, which gets quite difficult to track. Even the [git docs](https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things) seem to have a hard time explaining the flow-chart of undo. The `jj undo` command is very good, in part or in full because `jj` tracks all operations sequentially. `jj operations list` is just _fun to look at_. I can see my entire day in a `jj operations list`: what I worked on from clock in to clock out. It is excellent; and to be able to undo a accidental branch 
 
 ## The Ugly
 

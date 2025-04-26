@@ -8,20 +8,23 @@ layout: ../components/Layout.astro
 
 ![image](/images/me.jpg)
 
-Technology Enthusiast, C++ Enjoyer, and Software Craftsman (I'd like to think!).
+Technology Enthusiast enjoying the art of Software.
 
-Currently working on distributed systems at Google. 
+Currently working on distributed systems at Google.
 
-## Employment History
+[blog posts](blog_directory) 
+
+## Employment History 
 ### Google. July 2023-Current
 **RTDB - San Francisco. (L3 July 2023-Oct 2024. L4 Oct 2024-Current.)**
 
 SWE supporting ~30 million concurrents across multiple regions on a team of 6. Our main goal was to reduce the engineer time required for day-to-day maintenance; estimated 14 SWE day/month toil savings.
 
 - Migrated 10+ services to a Kubernetes from a (Linux) VM based architecture, modernizing development workflows practices and operational efficiency. 
-- Led the design and implementation of a  CI/CD pipeline with canary rollouts and rollbacks, deploying to over 500 nodes while maintaining 99.95% uptime. Manual time spent deploying decreased from days to minutes.
+- Led the design and implementation of a CI/CD pipeline with canary rollouts and rollbacks, deploying to over 500 nodes while maintaining 99.95% uptime. Manual time spent deploying decreased from days to minutes.
+- Overhauled the dev experience, migrating a poly-repo to a single uniform build, test and deploy process for every service we owned.
 - Led engineer onboarding to on-call; taught on-call processes and helped with ramp up tasks. Main POC for new engineers. Wrote various playbooks for processes such as rolling forward and rolling back.
-- Mitigated and root caused production failures for multiple production incidents including DOS attacks, often affecting large percentages (20%+)  of traffic. Utilized tools like metrics and logging to root cause and repair when required.
+- Mitigated and root caused production failures for multiple production incidents including DOS attacks, often affecting large percentages (20%+)  of traffic. Utilized tools like BigQuery (amongst the standard metrics + logging) to root cause and repair when required.
 - Attended syncs with dedicated support staff to provide support from core engineering  where required.
 - Leveraged C++ to build a large-scale data reconciliation job that compared over half a petabyte of customer data with 5 day SLO on reconciliation of corrupted data. Built, deployed, and operated a repair job that establishes consensus on 5-way replicated RocksDB cluster and repaired data by choosing the majority view. Maintained and monitored the operation of the service.
 - Inherited, maintained and extended an autofailover service that ingested server data (BigQuery) and detected unhealthy servers. Created a healing process to reinstate servers back in-rotation. 
