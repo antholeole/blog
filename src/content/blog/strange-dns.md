@@ -142,7 +142,7 @@ At this point, `external-dns` clicks into place! If `external-dns` is configured
 
 ![the dns record](/images/dns_cert.png)
 
-> An aside: Why not use metallb for this? You absolutely totally could. Infact, if I were running in almost any other context, I would use metallb in a heartbeat. I chose to not use it for a couple reasons, the first being that I don't know the IP range that my router assigns. I have no idea if I select an IP range that the router will conflict with. Second, because my expected traffic is very, very low, scaling up nginx pods is likely never going to happen. One pod per node to open up the port is more than good enough - and we lean on the router's assignment of private IPs so we never have to worry about IP ranges conflicting.
+> An aside: Why not use metallb for this? You absolutely totally could. Infact, if I were running in almost any other context, I would use metallb in a heartbeat. I chose to not use it for a couple reasons, the first being that I don't know the IP range that my router assigns. I have no idea if I select an IP range that the router will conflict with. Second, because my expected traffic is very, very low, scaling up nginx pods is likely never going to happen. One pod per node to open up the port is more than good enough - and we lean on the router's assignment of private IPs so we never have to worry about IP ranges conflicting. 
 
 ### SSL Certs
 
