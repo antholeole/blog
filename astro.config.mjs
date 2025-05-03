@@ -12,7 +12,10 @@ export default defineConfig({
 	markdown: {
 		remarkPlugins: [remarkAside, remarkNewthought],
 		shikiConfig: {
-			theme: 'solarized-light',
+			themes: {
+			light: 	'solarized-light',
+			dark: 	'solarized-dark',
+			},
 			langs: [],
 			wrap: false,
 		},
