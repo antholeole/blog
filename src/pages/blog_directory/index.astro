@@ -20,11 +20,9 @@ const posts = (await getCollection('blog')).sort(
 				<ul>
 					{
 						posts.map((post) => (
-							<li>
 								<a href={`/blog_directory/${post.slug}/`}>
 									<p><b>{post.data.title}</b>, <FormattedDate date={post.data.pubDate}></FormattedDate></p>
 								</a>
-							</li>
 						))
 					}
 				</ul>
