@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     devenv.url = "github:cachix/devenv";
   };
 
@@ -12,7 +12,8 @@
         modules = [
           ({ pkgs, ... }: {
             packages = with pkgs; [
-              miniserve
+              nodejs
+              d2
             ];
 
             languages.javascript = {

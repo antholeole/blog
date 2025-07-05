@@ -12,6 +12,19 @@ Turns out, the TL;DR was much better than the article itself so I got rid of it 
 
 tl;dr:
 
+```d2
+shape: sequence_diagram
+direction: down
+
+me."write cdk8s code"
+me -> colmena: "run `colmena apply`"
+colmena."rebuilds nixos changes & manifests"
+colmena -> server: "applies nixos changes, preloads containers"
+server."hosts an rclone pod that statically serves manifests"
+flux -> server: "queries rclone for changes"
+flux -> server: "kustomize and apply"
+```
+
 
 1. I use [cdk8s](https://cdk8s.io/) to create manifests. I have a [nix derivation](https://github.com/antholeole/home-server/blob/df45bd9b18bc535a8b682ef16e2130d587a0ef9a/cdk8s/default.nix) that generates the manifests. 
 2. I create the images I need with [nix-snapshotter](https://github.com/pdtpartners/nix-snapshotter), and then use `kustomize` to put the image with the correct tag into the manifests. Fully declarative manifests!
