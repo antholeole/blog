@@ -13,6 +13,7 @@ Technology Enthusiast enjoying the art of Software.
 Currently working on distributed systems at Google.
 
 [blog posts](blog_directory) 
+[YT Channel](https://www.youtube.com/channel/UCvJ5P5wul44NbZeH_qJTdJw)
 
 ## Employment History 
 ### Google. July 2023-Current
